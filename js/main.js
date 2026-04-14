@@ -21,15 +21,15 @@
     },
     {
       num: '02',
-      titleEn: 'Neoldam E-Commerce UX',
-      titleKo: '놀담 이커머스 UX',
+      titleEn: 'Nuldam E-Commerce UX',
+      titleKo: '널담 이커머스 UX',
       client: 'Join & Join',
       category: 'E-Commerce · Mobile',
       descEn: 'Information architecture and UI redesign for a vegan food e-commerce platform.',
       descKo: '비건·건강식품 이커머스 플랫폼의 정보구조 재설계 및 UI 개선.',
       stat: '25% cart abandon ↓ · 4% conversion ↑',
-      img: 'images/neoldam.jpg',
-      url: 'project/neoldam.html',
+      img: 'images/nuldam.jpg',
+      url: 'project/nuldam.html',
     },
     {
       num: '03',
@@ -352,8 +352,19 @@
     root.querySelectorAll('.img-slider').forEach(slider => {
       const slides = slider.querySelector('.img-slides');
       if (!slides) return;
-      const imgs = slides.querySelectorAll('img');
+      const imgs = Array.from(slides.querySelectorAll('img'));
       if (imgs.length < 2) return;
+
+      // 무한 루프: 첫 번째·마지막 슬라이드 복제본을 앞뒤에 삽입
+      // 순서: [lastClone, img0, img1, ..., imgN, firstClone]
+      slides.appendChild(imgs[0].cloneNode(true));
+      slides.insertBefore(imgs[imgs.length - 1].cloneNode(true), imgs[0]);
+      const total = imgs.length + 2;
+      let current = 1; // 실제 첫 번째 슬라이드 인덱스
+
+      // 초기 위치 (애니메이션 없이)
+      slides.style.transition = 'none';
+      slides.style.transform = `translateX(-100%)`;
 
       // 도트 생성
       const dotsWrap = document.createElement('div');
@@ -364,18 +375,38 @@
         dotsWrap.appendChild(dot);
       });
       slider.appendChild(dotsWrap);
-
       const dots = dotsWrap.querySelectorAll('.slider-dot');
-      let current = 0;
 
-      function goTo(n) {
-        current = (n + imgs.length) % imgs.length;
-        slides.style.transform = `translateX(-${current * 100}%)`;
-        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      function updateDots() {
+        const idx = ((current - 1) + imgs.length) % imgs.length;
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
       }
 
+      function goTo(n) {
+        current = n;
+        slides.style.transform = `translateX(-${current * 100}%)`;
+        updateDots();
+      }
+
+      // transition 끝나면 clone → 실제 슬라이드로 순간이동 (무한 루프 핵심)
+      slides.addEventListener('transitionend', () => {
+        if (current === 0) {
+          slides.style.transition = 'none';
+          current = imgs.length;
+          slides.style.transform = `translateX(-${current * 100}%)`;
+          slides.getBoundingClientRect(); // reflow
+          slides.style.transition = '';
+        } else if (current === total - 1) {
+          slides.style.transition = 'none';
+          current = 1;
+          slides.style.transform = `translateX(-${current * 100}%)`;
+          slides.getBoundingClientRect(); // reflow
+          slides.style.transition = '';
+        }
+      });
+
       dots.forEach((dot, i) => dot.addEventListener('click', () => {
-        goTo(i);
+        goTo(i + 1);
         resetTimer();
       }));
 
@@ -392,7 +423,6 @@
       let dragStartX = 0;
       let isDragging = false;
 
-      // 마우스 드래그 — mouseup을 document에서 받아 슬라이더 밖으로 나가도 동작
       slider.addEventListener('mousedown', e => {
         dragStartX = e.clientX;
         isDragging = true;
@@ -422,7 +452,6 @@
       slider.addEventListener('touchmove', e => {
         const dx = Math.abs(e.touches[0].clientX - touchStartX);
         const dy = Math.abs(e.touches[0].clientY - touchStartY);
-        // 수평 이동이 우세하면 페이지 스크롤 차단
         if (dx > dy) e.preventDefault();
       }, { passive: false });
       slider.addEventListener('touchend', e => {
