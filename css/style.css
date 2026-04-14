@@ -828,6 +828,8 @@ nav.detail-nav {
   position: absolute;
   inset: 0;
   overflow: hidden;
+  cursor: grab;
+  user-select: none;
 }
 
 .img-slides {

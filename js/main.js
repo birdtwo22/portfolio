@@ -373,12 +373,57 @@
 
       dots.forEach((dot, i) => dot.addEventListener('click', () => {
         goTo(i);
-        // 클릭하면 타이머 리셋
+        resetTimer();
+      }));
+
+      // 타이머 리셋 헬퍼
+      function resetTimer() {
         clearInterval(_sliderIntervals[_sliderIntervals.length - 1]);
         _sliderIntervals.pop();
         const id = setInterval(() => goTo(current + 1), 3500);
         _sliderIntervals.push(id);
-      }));
+      }
+
+      // 드래그 / 스와이프
+      const DRAG_THRESHOLD = 50;
+      let dragStartX = 0;
+      let isDragging = false;
+
+      // 마우스 드래그
+      slider.addEventListener('mousedown', e => {
+        dragStartX = e.clientX;
+        isDragging = true;
+      });
+      slider.addEventListener('mousemove', e => {
+        if (isDragging) slides.style.cursor = 'grabbing';
+      });
+      slider.addEventListener('mouseup', e => {
+        if (!isDragging) return;
+        isDragging = false;
+        slides.style.cursor = '';
+        const dx = e.clientX - dragStartX;
+        if (Math.abs(dx) > DRAG_THRESHOLD) {
+          goTo(current + (dx < 0 ? 1 : -1));
+          resetTimer();
+        }
+      });
+      slider.addEventListener('mouseleave', () => {
+        isDragging = false;
+        slides.style.cursor = '';
+      });
+
+      // 터치 스와이프
+      let touchStartX = 0;
+      slider.addEventListener('touchstart', e => {
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+      slider.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > DRAG_THRESHOLD) {
+          goTo(current + (dx < 0 ? 1 : -1));
+          resetTimer();
+        }
+      }, { passive: true });
 
       const id = setInterval(() => goTo(current + 1), 3500);
       _sliderIntervals.push(id);
