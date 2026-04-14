@@ -297,7 +297,7 @@
 
       try {
         const res  = await fetch(p.url);
-        const html = await res.text();
+        const html = (await res.text()).replace(/\.\.\/images\//g, 'images/');
         const doc  = new DOMParser().parseFromString(html, 'text/html');
 
         content.innerHTML = '';
