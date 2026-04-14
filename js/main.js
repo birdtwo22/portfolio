@@ -438,7 +438,7 @@
         slider.style.cursor = 'grab';
         const dx = e.clientX - dragStartX;
         if (Math.abs(dx) > DRAG_THRESHOLD) {
-          goTo(current + (dx < 0 ? 1 : -1));
+          goTo(current + (dx > 0 ? 1 : -1));
           resetTimer();
         }
       }
@@ -460,7 +460,7 @@
       slider.addEventListener('touchend', e => {
         const dx = e.changedTouches[0].clientX - touchStartX;
         if (Math.abs(dx) > DRAG_THRESHOLD) {
-          goTo(current + (dx < 0 ? 1 : -1));
+          goTo(current + (dx > 0 ? 1 : -1));
           resetTimer();
         }
       }, { passive: true });
