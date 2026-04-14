@@ -365,6 +365,8 @@
       // 초기 위치 (애니메이션 없이)
       slides.style.transition = 'none';
       slides.style.transform = `translateX(-100%)`;
+      slides.getBoundingClientRect();
+      slides.style.transition = 'transform 0.6s ease';
 
       // 도트 생성
       const dotsWrap = document.createElement('div');
@@ -389,19 +391,20 @@
       }
 
       // transition 끝나면 clone → 실제 슬라이드로 순간이동 (무한 루프 핵심)
+      const TRANS = 'transform 0.6s ease';
       slides.addEventListener('transitionend', () => {
         if (current === 0) {
           slides.style.transition = 'none';
           current = imgs.length;
           slides.style.transform = `translateX(-${current * 100}%)`;
-          slides.getBoundingClientRect(); // reflow
-          slides.style.transition = '';
+          slides.getBoundingClientRect();
+          slides.style.transition = TRANS;
         } else if (current === total - 1) {
           slides.style.transition = 'none';
           current = 1;
           slides.style.transform = `translateX(-${current * 100}%)`;
-          slides.getBoundingClientRect(); // reflow
-          slides.style.transition = '';
+          slides.getBoundingClientRect();
+          slides.style.transition = TRANS;
         }
       });
 
