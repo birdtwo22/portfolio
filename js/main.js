@@ -339,10 +339,13 @@
 
   // ── Image slider ─────────────────────────────────────────
   let _sliderIntervals = [];
+  let _sliderCleanups = [];
 
   function clearSliders() {
     _sliderIntervals.forEach(clearInterval);
     _sliderIntervals = [];
+    _sliderCleanups.forEach(fn => fn());
+    _sliderCleanups = [];
   }
 
   function initSliders(root) {
@@ -389,28 +392,25 @@
       let dragStartX = 0;
       let isDragging = false;
 
-      // 마우스 드래그
+      // 마우스 드래그 — mouseup을 document에서 받아 슬라이더 밖으로 나가도 동작
       slider.addEventListener('mousedown', e => {
         dragStartX = e.clientX;
         isDragging = true;
+        slider.style.cursor = 'grabbing';
+        e.preventDefault();
       });
-      slider.addEventListener('mousemove', e => {
-        if (isDragging) slides.style.cursor = 'grabbing';
-      });
-      slider.addEventListener('mouseup', e => {
+      function onMouseUp(e) {
         if (!isDragging) return;
         isDragging = false;
-        slides.style.cursor = '';
+        slider.style.cursor = 'grab';
         const dx = e.clientX - dragStartX;
         if (Math.abs(dx) > DRAG_THRESHOLD) {
           goTo(current + (dx < 0 ? 1 : -1));
           resetTimer();
         }
-      });
-      slider.addEventListener('mouseleave', () => {
-        isDragging = false;
-        slides.style.cursor = '';
-      });
+      }
+      document.addEventListener('mouseup', onMouseUp);
+      _sliderCleanups.push(() => document.removeEventListener('mouseup', onMouseUp));
 
       // 터치 스와이프
       let touchStartX = 0;
