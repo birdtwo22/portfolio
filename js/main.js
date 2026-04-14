@@ -414,9 +414,17 @@
 
       // 터치 스와이프
       let touchStartX = 0;
+      let touchStartY = 0;
       slider.addEventListener('touchstart', e => {
         touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
       }, { passive: true });
+      slider.addEventListener('touchmove', e => {
+        const dx = Math.abs(e.touches[0].clientX - touchStartX);
+        const dy = Math.abs(e.touches[0].clientY - touchStartY);
+        // 수평 이동이 우세하면 페이지 스크롤 차단
+        if (dx > dy) e.preventDefault();
+      }, { passive: false });
       slider.addEventListener('touchend', e => {
         const dx = e.changedTouches[0].clientX - touchStartX;
         if (Math.abs(dx) > DRAG_THRESHOLD) {
