@@ -21,19 +21,30 @@
     },
     {
       num: '02',
-      titleEn: 'CCNC IVI GUI Resources',
-      titleKo: 'CCNC IVI GUI 리소스',
-      client: 'Hyundai Motor Company',
-      category: 'Automotive · IVI',
-      descEn: 'GUI resource production and design guide for next-generation in-vehicle infotainment.',
-      descKo: '차세대 커넥티드카 내비게이션 센터 인포테인먼트 시스템 GUI 리소스 및 가이드 제작.',
-      stat: '×2 follow-up contracts',
-      img: null,
-      placeholder: 'Hyundai\nCCNC IVI',
-      url: 'project/ccnc.html',
+      titleEn: 'Neoldam E-Commerce UX',
+      titleKo: '놀담 이커머스 UX',
+      client: 'Join & Join',
+      category: 'E-Commerce · Mobile',
+      descEn: 'Information architecture and UI redesign for a vegan food e-commerce platform.',
+      descKo: '비건·건강식품 이커머스 플랫폼의 정보구조 재설계 및 UI 개선.',
+      stat: '25% cart abandon ↓ · 4% conversion ↑',
+      img: 'images/neoldam.jpg',
+      url: 'project/neoldam.html',
     },
     {
       num: '03',
+      titleEn: 'UX Guideline Asset System',
+      titleKo: 'UX 가이드라인 에셋 시스템',
+      client: 'Hyundai Motor Company',
+      category: 'Design System',
+      descEn: 'Modular asset package and style guide system that cut documentation time by 66%.',
+      descKo: '모듈형 에셋 패키지 및 스타일 가이드 시스템 구축으로 문서 작성 시간 66% 단축.',
+      stat: '66% faster documentation',
+      img: 'images/ux-guideline.jpg',
+      url: 'project/ux-guideline.html',
+    },
+    {
+      num: '04',
       titleEn: 'Slim Display HUD Concept',
       titleKo: '슬림 디스플레이 HUD 컨셉',
       client: 'Hyundai Motor Company',
@@ -45,7 +56,32 @@
       url: 'project/slim-display.html',
     },
     {
-      num: '04',
+      num: '05',
+      titleEn: 'Optical Display Concept',
+      titleKo: '옵티컬 디스플레이 컨셉',
+      client: 'LG Electronics',
+      category: 'Automotive · R&D',
+      descEn: 'CID and triple-display concept for automotive exhibition — research to GUI design.',
+      descKo: '차량용 전시를 위한 CID 및 트리플 디스플레이 컨셉 — 리서치부터 GUI 설계까지.',
+      stat: 'CID concept adopted ✓',
+      img: 'images/lg-optical.jpg',
+      url: 'project/lg-optical.html',
+    },
+    {
+      num: '06',
+      titleEn: 'Mohey Meeting Platform',
+      titleKo: '모헤이 모임 플랫폼',
+      client: 'Wiracle (Co-founder)',
+      category: 'Platform · Startup',
+      descEn: 'End-to-end product and brand design for a student networking startup.',
+      descKo: '학생 네트워킹 스타트업의 프로덕트 및 브랜드 디자인 전체.',
+      stat: '4,000 users · 200+ meetups',
+      img: null,
+      placeholder: 'Mohey\nPlatform',
+      url: 'project/mohey.html',
+    },
+    {
+      num: '07',
       titleEn: 'IVI Real-Time Data Service',
       titleKo: 'IVI 실시간 데이터 서비스',
       client: 'Hyundai Motor Company',
@@ -58,53 +94,17 @@
       url: 'project/ivi-service.html',
     },
     {
-      num: '05',
-      titleEn: 'UX Guideline Asset System',
-      titleKo: 'UX 가이드라인 에셋 시스템',
-      client: 'Hyundai Motor Company',
-      category: 'Design System',
-      descEn: 'Modular asset package and style guide system that cut documentation time by 66%.',
-      descKo: '모듈형 에셋 패키지 및 스타일 가이드 시스템 구축으로 문서 작성 시간 66% 단축.',
-      stat: '66% faster documentation',
-      img: 'images/ux-guideline.jpg',
-      url: 'project/ux-guideline.html',
-    },
-    {
-      num: '06',
-      titleEn: 'Optical Display Concept',
-      titleKo: '옵티컬 디스플레이 컨셉',
-      client: 'LG Electronics',
-      category: 'Automotive · R&D',
-      descEn: 'CID and triple-display concept for automotive exhibition — research to GUI design.',
-      descKo: '차량용 전시를 위한 CID 및 트리플 디스플레이 컨셉 — 리서치부터 GUI 설계까지.',
-      stat: 'CID concept adopted ✓',
-      img: 'images/lg-optical.jpg',
-      url: 'project/lg-optical.html',
-    },
-    {
-      num: '07',
-      titleEn: 'Neoldam E-Commerce UX',
-      titleKo: '놀담 이커머스 UX',
-      client: 'Join & Join',
-      category: 'E-Commerce · Mobile',
-      descEn: 'Information architecture and UI redesign for a vegan food e-commerce platform.',
-      descKo: '비건·건강식품 이커머스 플랫폼의 정보구조 재설계 및 UI 개선.',
-      stat: '25% cart abandon ↓ · 4% conversion ↑',
-      img: 'images/neoldam.jpg',
-      url: 'project/neoldam.html',
-    },
-    {
       num: '08',
-      titleEn: 'Mohey Meeting Platform',
-      titleKo: '모헤이 모임 플랫폼',
-      client: 'Wiracle (Co-founder)',
-      category: 'Platform · Startup',
-      descEn: 'End-to-end product and brand design for a student networking startup.',
-      descKo: '학생 네트워킹 스타트업의 프로덕트 및 브랜드 디자인 전체.',
-      stat: '4,000 users · 200+ meetups',
+      titleEn: 'CCNC IVI GUI Resources',
+      titleKo: 'CCNC IVI GUI 리소스',
+      client: 'Hyundai Motor Company',
+      category: 'Automotive · IVI',
+      descEn: 'GUI resource production and design guide for next-generation in-vehicle infotainment.',
+      descKo: '차세대 커넥티드카 내비게이션 센터 인포테인먼트 시스템 GUI 리소스 및 가이드 제작.',
+      stat: '×2 follow-up contracts',
       img: null,
-      placeholder: 'Mohey\nPlatform',
-      url: 'project/mohey.html',
+      placeholder: 'Hyundai\nCCNC IVI',
+      url: 'project/ccnc.html',
     },
   ];
 
@@ -276,6 +276,7 @@
   }
 
   async function showProject(idx) {
+    clearSliders();
     const p = PROJECTS[idx];
     introPanel.classList.add('fading');
     setTimeout(async () => {
@@ -296,7 +297,7 @@
         </div>`;
 
       try {
-        const res  = await fetch(p.url);
+        const res  = await fetch(p.url, { cache: 'no-store' });
         const html = (await res.text()).replace(/\.\.\/images\//g, 'images/');
         const doc  = new DOMParser().parseFromString(html, 'text/html');
 
@@ -306,6 +307,8 @@
           if (el) content.appendChild(document.adoptNode(el));
         });
 
+        // 슬라이더 초기화
+        initSliders(content);
         // 스크롤 힌트 업데이트
         requestAnimationFrame(updateScrollFade);
       } catch (e) {
@@ -333,6 +336,57 @@
   // 이름 클릭 → 소개 화면으로 돌아가기
   const colName = document.querySelector('.col-name');
   if (colName) colName.addEventListener('click', showIntro);
+
+  // ── Image slider ─────────────────────────────────────────
+  let _sliderIntervals = [];
+
+  function clearSliders() {
+    _sliderIntervals.forEach(clearInterval);
+    _sliderIntervals = [];
+  }
+
+  function initSliders(root) {
+    root.querySelectorAll('.img-slider').forEach(slider => {
+      const slides = slider.querySelector('.img-slides');
+      if (!slides) return;
+      const imgs = slides.querySelectorAll('img');
+      if (imgs.length < 2) return;
+
+      // 도트 생성
+      const dotsWrap = document.createElement('div');
+      dotsWrap.className = 'slider-dots';
+      imgs.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+        dotsWrap.appendChild(dot);
+      });
+      slider.appendChild(dotsWrap);
+
+      const dots = dotsWrap.querySelectorAll('.slider-dot');
+      let current = 0;
+
+      function goTo(n) {
+        current = (n + imgs.length) % imgs.length;
+        slides.style.transform = `translateX(-${current * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      }
+
+      dots.forEach((dot, i) => dot.addEventListener('click', () => {
+        goTo(i);
+        // 클릭하면 타이머 리셋
+        clearInterval(_sliderIntervals[_sliderIntervals.length - 1]);
+        _sliderIntervals.pop();
+        const id = setInterval(() => goTo(current + 1), 3500);
+        _sliderIntervals.push(id);
+      }));
+
+      const id = setInterval(() => goTo(current + 1), 3500);
+      _sliderIntervals.push(id);
+    });
+  }
+
+  // 직접 접근 시 (detail 페이지 단독 로드)
+  initSliders(document);
 
   // ── Clock ─────────────────────────────────────────────────
   const clockEl = document.getElementById('clock');

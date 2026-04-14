@@ -731,6 +731,7 @@ img { display: block; }
   margin-top: 0;
   height: auto;
   aspect-ratio: 16 / 9;
+  overflow: hidden;
 }
 
 .project-content .detail-body {
@@ -808,6 +809,7 @@ nav.detail-nav {
 
 /* Detail hero image */
 .detail-img-hero {
+  position: relative;
   width: 100%;
   height: 56vh;
   overflow: hidden;
@@ -819,6 +821,54 @@ nav.detail-nav {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* ── Image slider ─────────────────────────── */
+.img-slider {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.img-slides {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.img-slides img {
+  min-width: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+}
+
+.slider-dots {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 7px;
+  z-index: 2;
+}
+
+.slider-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.slider-dot.active {
+  background: #fff;
+  transform: scale(1.25);
 }
 
 /* Detail header */
