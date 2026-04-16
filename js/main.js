@@ -488,6 +488,3 @@
   }
 
 })();
-cd ~/web/portfolio
-perl -i -0pe ...
-perl -i -0pe ...
