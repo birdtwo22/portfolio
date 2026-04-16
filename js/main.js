@@ -436,8 +436,10 @@
         if (!isDragging) return;
         isDragging = false;
         slider.style.cursor = 'grab';
-        ${1}-1${2}1));
-          resetTimer();
+        const dx = e.clientX - dragStartX;
+        if (Math.abs(dx) > DRAG_THRESHOLD) {
+          goTo(current + (dx > 0 ? -1 : 1));
+           resetTimer();
         }
       }
       document.addEventListener('mouseup', onMouseUp);
@@ -456,8 +458,10 @@
         if (dx > dy) e.preventDefault();
       }, { passive: false });
       slider.addEventListener('touchend', e => {
-        ${1}-1${2}1));
-          resetTimer();
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > DRAG_THRESHOLD) {
+          goTo(current + (dx > 0 ? -1 : 1));
+           resetTimer();
         }
       }, { passive: true });
 
@@ -485,5 +489,5 @@
 
 })();
 cd ~/web/portfolio
-perl -i -0pe 's/(const dx = e\.clientX - dragStartX;\n\s+if \(Math\.abs\(dx\) > DRAG_THRESHOLD\) \{\n\s+goTo\(current \+ \(dx > 0 \? )1( : )-1/\${1}-1\${2}1/g' js/main.js
-perl -i -0pe 's/(const dx = e\.changedTouches\[0\]\.clientX - touchStartX;\n\s+if \(Math\.abs\(dx\) > DRAG_THRESHOLD\) \{\n\s+goTo\(current \+ \(dx > 0 \? )1( : )-1/\${1}-1\${2}1/g' js/main.js
+perl -i -0pe ...
+perl -i -0pe ...
