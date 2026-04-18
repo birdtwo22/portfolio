@@ -490,7 +490,7 @@
       observer.observe(el);
     });
 
-    root.querySelectorAll('.detail-section, .detail-hero, .detail-img-hero').forEach((el, i) => {
+    root.querySelectorAll('.detail-section, .detail-hero').forEach((el, i) => {
       el.classList.add('scroll-hidden');
       el.style.transitionDelay = `${i * 80}ms`;
       observer.observe(el);
