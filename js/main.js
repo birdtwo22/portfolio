@@ -309,6 +309,7 @@
 
         // 슬라이더 초기화
         initSliders(content);
+                 initScrollAnimations(content);
         // 스크롤 힌트 업데이트
         requestAnimationFrame(updateScrollFade);
       } catch (e) {
@@ -472,6 +473,31 @@
 
   // 직접 접근 시 (detail 페이지 단독 로드)
   initSliders(document);
+     // ── Scroll animations ────────────────────────────────────
+  function initScrollAnimations(root) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('scroll-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    root.querySelectorAll('.proj-list-item').forEach((el, i) => {
+      el.classList.add('scroll-hidden');
+      el.style.transitionDelay = `${i * 60}ms`;
+      observer.observe(el);
+    });
+
+    root.querySelectorAll('.detail-section, .detail-hero, .detail-img-hero').forEach((el, i) => {
+      el.classList.add('scroll-hidden');
+      el.style.transitionDelay = `${i * 80}ms`;
+      observer.observe(el);
+    });
+  }
+
+  initScrollAnimations(document);
 
   // ── Clock ─────────────────────────────────────────────────
   const clockEl = document.getElementById('clock');
