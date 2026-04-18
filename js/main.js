@@ -498,6 +498,31 @@
   }
 
   initScrollAnimations(document);
+     // ── About page scroll animations ─────────────────────────
+  function initAboutAnimations() {
+    const panel = document.getElementById('intro-panel');
+    if (!panel) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('scroll-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { root: panel, threshold: 0.1 });
+
+    const targets = panel.querySelectorAll(
+      '.about-top, .about-divider, .about-section-title, .about-row'
+    );
+    targets.forEach((el, i) => {
+      el.classList.add('scroll-hidden');
+      el.style.transitionDelay = `${i * 70}ms`;
+      observer.observe(el);
+    });
+  }
+
+  initAboutAnimations();
 
   // ── Clock ─────────────────────────────────────────────────
   const clockEl = document.getElementById('clock');
