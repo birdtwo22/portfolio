@@ -196,7 +196,65 @@
   const colName = document.querySelector('.col-name');
   if (colName) colName.addEventListener('click', showIntro);
 
+  // ── Language toggle ──────────────────────────────────────
+  function applyLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.style.display = el.dataset.lang === lang ? '' : 'none';
+    });
+  }
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyLang(btn.dataset.lang);
+    });
+  });
+  applyLang('en');
+  function showIntro() {
+    listItems.forEach(i => i.classList.remove('active'));
+    activeIdx = -1;
+    document.getElementById('intro-panel').style.display = '';
+    document.getElementById('project-panel').style.display = 'none';
+    clearSliders();
+  }
+  function showProject(idx) {
+    const p = PROJECTS[idx];
+    if (!p) return;
+    const lang = document.querySelector('.lang-btn.active')?.dataset.lang || 'en';
+    const heroHtml = p.img
+      ? `<img src="${p.img}" alt="${p.titleEn}" class="proj-hero-img" />`
+      : `<div class="proj-hero-placeholder">${(p.placeholder || p.titleEn).replace('\n', '<br>')}</div>`;
+    document.getElementById('project-content').innerHTML = `
+      <div class="detail-hero">${heroHtml}</div>
+      <div class="detail-section">
+        <span class="detail-label">${p.num} · ${p.category}</span>
+        <h1 class="detail-title">
+          <span data-lang="en">${p.titleEn}</span>
+          <span data-lang="ko">${p.titleKo}</span>
+        </h1>
+        <p class="detail-client">${p.client}</p>
+        <p class="detail-stat">${p.stat}</p>
+        <p class="detail-desc">
+          <span data-lang="en">${p.descEn}</span>
+          <span data-lang="ko">${p.descKo}</span>
+        </p>
+        <a href="${p.url}" class="detail-cta">
+          <span data-lang="en">View case study \u2192</span>
+          <span data-lang="ko">\ucf00\uc774\uc2a4 \uc2a4\ud130\ub514 \ubcf4\uae30 \u2192</span>
+        </a>
+      </div>
+    `;
+    document.getElementById('intro-panel').style.display = 'none';
+    const panel = document.getElementById('project-panel');
+    panel.style.display = '';
+    panel.scrollTop = 0;
+    applyLang(lang);
+    clearSliders();
+    initSliders(panel);
+    initScrollAnimations(panel);
+  }
   // ── Image slider ─────────────────────────────────────────
+
   let _sliderIntervals = [];
   let _sliderCleanups = [];
 
