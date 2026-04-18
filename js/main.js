@@ -135,27 +135,29 @@
 
     const OFFSETS = [
       [-80, -80], [0, -80], [0, -80], [80, -80],
+      [-80,   0], [0,   0], [0,   0], [80,   0],
       [-80,  80], [0,  80], [0,  80], [80,  80],
     ];
-    const TILTS = [0, 0, 0, 0, 0, 0, 0, 0];
     splashCards.forEach((card, idx) => {
       const [dx, dy] = OFFSETS[idx] || [0, -60];
-      card.style.transform = `translate(${dx}px, ${dy}px) scale(0.82) rotate(${TILTS[idx]}deg)`;
+      card.style.transform = `translate(${dx}px, ${dy}px) scale(0.82)`;
     });
-    const SCATTER = [0, 5, 2, 7, 3, 6, 1, 4];
+    const SCATTER = [0, 1, 4, 2, 5, 8, 3, 6, 9, 7, 10, 11];
+    const N = SCATTER.length - 1;
     SCATTER.forEach((idx, i) => {
       setTimeout(() => {
         splashCards[idx].style.opacity = '1';
-        splashCards[idx].style.transform = `rotate(${TILTS[idx]}deg)`;
-      }, 80 + i * 110);
+        splashCards[idx].style.transform = 'none';
+      }, 80 + i * 90);
     });
-    setTimeout(() => splash.classList.add('ready'), 80 + 7 * 110 + 200);
+    setTimeout(() => splash.classList.add('ready'), 80 + N * 90 + 200);
     setTimeout(() => {
       splash.classList.add('phase2');
-      [1, 2].forEach(idx => { splashCards[idx].style.transform = `rotate(${TILTS[idx]}deg) translateY(-100px)`; });
-      [5, 6].forEach(idx => { splashCards[idx].style.transform = `rotate(${TILTS[idx]}deg) translateY(100px)`; });
+      [1, 2].forEach(idx => { splashCards[idx].style.transform = 'translateY(-110px)'; });
+      [5, 6].forEach(idx => { splashCards[idx].style.transform = 'translateY(-70px)'; });
+      [9, 10].forEach(idx => { splashCards[idx].style.transform = 'translateY(110px)'; });
       document.getElementById('splash-headline').classList.add('visible');
-    }, 80 + 7 * 110 + 700);
+    }, 80 + N * 90 + 700);
 
     splashEnter.addEventListener('click', e => { e.stopPropagation(); dismissSplash(); });
     splash.addEventListener('click', e => {
