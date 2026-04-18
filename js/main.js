@@ -137,7 +137,7 @@
       [-80, -80], [0, -80], [0, -80], [80, -80],
       [-80,  80], [0,  80], [0,  80], [80,  80],
     ];
-    const TILTS = [-1.5, 0.8, -0.6, 1.3, 0.9, -1.2, 0.5, -0.7];
+    const TILTS = [0, 0, 0, 0, 0, 0, 0, 0];
     splashCards.forEach((card, idx) => {
       const [dx, dy] = OFFSETS[idx] || [0, -60];
       card.style.transform = `translate(${dx}px, ${dy}px) scale(0.82) rotate(${TILTS[idx]}deg)`;

@@ -302,7 +302,8 @@ img { display: block; }
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.9s ease;
-  z-index: 3;
+  z-index: 10;
+  background: rgba(0,0,0,0.45);
 }
 .splash-headline.visible { opacity: 1; }
 .sh-title {
