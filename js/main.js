@@ -503,23 +503,14 @@
   function initAboutAnimations() {
     const panel = document.getElementById('intro-panel');
     if (!panel) return;
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('scroll-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { root: panel, threshold: 0.1 });
-
-    const targets = panel.querySelectorAll(
+    const targets = Array.from(panel.querySelectorAll(
       '.about-top, .about-divider, .about-section-title, .about-row'
-    );
+    ));
     targets.forEach((el, i) => {
-      el.classList.add('scroll-hidden');
-      el.style.transitionDelay = `${i * 70}ms`;
-      observer.observe(el);
+      setTimeout(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, i * 80);
     });
   }
 
