@@ -108,215 +108,48 @@
     },
   ];
 
-  // ── Splash screen ────────────────────────────────────────
+    // ── Splash screen ────────────────────────────────────────
   const splash      = document.getElementById('splash');
   const splashEnter = document.getElementById('splash-enter');
-  const splashInner = splash.querySelector('.splash-inner');
-  const carousel    = document.getElementById('splash-carousel');
-  const cylinder    = document.getElementById('cylinder');
-  const splashCards = Array.from(cylinder.querySelectorAll('.sc'));
-  const TOTAL       = splashCards.length; // 8
-  const ANGLE       = 360 / TOTAL;        // 45deg per card
-
-  // 카드를 원통 표면에 배치 (한 번만 호출)
-  function initCylinder() {
-    // requestAnimationFrame 이후에 offsetWidth가 정확히 잡힘
-    const cardW  = splashCards[0].offsetWidth || 256;
-    const RADIUS = Math.ceil(cardW / (2 * Math.sin(Math.PI / TOTAL)) * 1.08);
-    splashCards.forEach((card, i) => {
-      card.style.transform = `rotateY(${i * ANGLE}deg) translateZ(${RADIUS}px)`;
-    });
-    // 반지름 저장
-    cylinder.dataset.radius = String(RADIUS);
-  }
-
-  // 원통을 회전시켜 activeIdx 카드를 정면으로
-  function positionCards(activeIdx) {
-    cylinder.style.transform = `rotateY(${-activeIdx * ANGLE}deg)`;
-    splashCards.forEach((card, i) => {
-      card.classList.toggle('active', i === activeIdx);
-    });
-  }
+  const splashGrid  = document.getElementById('splash-grid');
+  const splashCards = Array.from(splashGrid.querySelectorAll('.sg-card'));
 
   if (sessionStorage.getItem('sp-visited')) {
     splash.style.display = 'none';
   } else {
-    let activeIdx  = 0; // 첫 번째 카드(Monimo)부터 시작
-    let dismissed  = false;
-    let accumDelta = 0;
-    const SNAP_THRESHOLD = 120;
-
-    requestAnimationFrame(() => {
-      initCylinder();
-      positionCards(activeIdx);
-      setTimeout(() => splash.classList.add('ready'), 80);
-    });
+    let dismissed = false;
 
     function dismissSplash() {
       if (dismissed) return;
       dismissed = true;
       sessionStorage.setItem('sp-visited', '1');
       splash.classList.add('hidden');
-             setTimeout(initAboutAnimations, 700);
-
-      // 페이드아웃 중 wheel 이벤트가 아래 패널로 새는 것 방지
       const blockScroll = e => e.preventDefault();
       document.addEventListener('wheel', blockScroll, { passive: false });
       setTimeout(() => {
         splash.style.display = 'none';
         document.removeEventListener('wheel', blockScroll);
+        setTimeout(initAboutAnimations, 700);
       }, 750);
     }
 
-    function advance(dir) {
-      // dir: +1 = 오른쪽(다음), -1 = 왼쪽(이전)
-      const next = activeIdx + dir;
-      if (next < 0) return;
-      if (next >= TOTAL) { dismissSplash(); return; }
-      activeIdx = next;
-      positionCards(activeIdx);
-    }
-
-    // 휠 스크롤 → 카드 이동
-    splash.addEventListener('wheel', e => {
-      e.preventDefault();
-      accumDelta += e.deltaY;
-      if (accumDelta > SNAP_THRESHOLD)  { advance(+1); accumDelta = 0; }
-      if (accumDelta < -SNAP_THRESHOLD) { advance(-1); accumDelta = 0; }
-    }, { passive: false });
-
-    // 터치 스와이프
-    let touchX = 0, touchY = 0;
-    splash.addEventListener('touchstart', e => {
-      touchX = e.touches[0].clientX;
-      touchY = e.touches[0].clientY;
-    }, { passive: true });
-    splash.addEventListener('touchmove', e => {
-      e.preventDefault();
-      const dx = touchX - e.touches[0].clientX;
-      const dy = touchY - e.touches[0].clientY;
-      if (Math.abs(dy) > Math.abs(dx)) {
-        accumDelta += dy;
-      } else {
-        accumDelta += dx;
-      }
-      touchX = e.touches[0].clientX;
-      touchY = e.touches[0].clientY;
-      if (accumDelta > SNAP_THRESHOLD)  { advance(+1); accumDelta = 0; }
-      if (accumDelta < -SNAP_THRESHOLD) { advance(-1); accumDelta = 0; }
-    }, { passive: false });
-
-    // 카드 클릭 → active 카드면 상세 페이지, 아니면 그 카드로 이동
-    splashCards.forEach((card, i) => {
-      card.addEventListener('click', e => {
-        e.stopPropagation();
-        if (i === activeIdx) {
-          window.location.href = card.href;
-        } else {
-          advance(i > activeIdx ? 1 : -1);
-        }
-      });
+    const SCATTER = [0, 5, 2, 7, 3, 6, 1, 4];
+    SCATTER.forEach((idx, i) => {
+      setTimeout(() => {
+        splashCards[idx].style.opacity = '1';
+        splashCards[idx].style.transform = 'scale(1)';
+      }, 80 + i * 110);
     });
+    setTimeout(() => splash.classList.add('ready'), 80 + 7 * 110 + 200);
 
-    // Enter 버튼 · 빈 영역 클릭 · 키보드
     splashEnter.addEventListener('click', e => { e.stopPropagation(); dismissSplash(); });
     splash.addEventListener('click', e => {
-      if (!e.target.closest('.sc')) dismissSplash();
+      if (!e.target.closest('.sg-card')) dismissSplash();
     });
     document.addEventListener('keydown', e => {
       if (dismissed) return;
-      if (e.key === 'ArrowRight') advance(+1);
-      else if (e.key === 'ArrowLeft') advance(-1);
-      else if (e.key === 'Enter' || e.key === 'Escape') dismissSplash();
+      if (e.key === 'Enter' || e.key === 'Escape') dismissSplash();
     });
-  }
-
-  // ── Current language ──────────────────────────────────────
-  let currentLang = localStorage.getItem('sp-lang') || 'en';
-  applyLang(currentLang);
-
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      currentLang = btn.dataset.lang;
-      applyLang(currentLang);
-      localStorage.setItem('sp-lang', currentLang);
-    });
-  });
-
-  function applyLang(lang) {
-    document.body.classList.toggle('lang-ko', lang === 'ko');
-    document.querySelectorAll('.lang-btn').forEach(b => {
-      b.classList.toggle('active', b.dataset.lang === lang);
-    });
-  }
-
-  // ── Panels ───────────────────────────────────────────────
-  const introPanel   = document.getElementById('intro-panel');
-  const projectPanel = document.getElementById('project-panel');
-  const scrollFade   = document.getElementById('panel-scroll-fade');
-
-  function updateScrollFade() {
-    if (!scrollFade) return;
-    const hasOverflow = projectPanel.scrollHeight > projectPanel.clientHeight + 16;
-    const atEnd = projectPanel.scrollTop + projectPanel.clientHeight >= projectPanel.scrollHeight - 16;
-    scrollFade.classList.toggle('visible', hasOverflow && !atEnd);
-  }
-
-  projectPanel.addEventListener('scroll', updateScrollFade, { passive: true });
-
-  function showIntro() {
-    activeIdx = -1;
-    listItems.forEach(i => i.classList.remove('active'));
-    projectPanel.classList.add('fading');
-    scrollFade.classList.remove('visible');
-    setTimeout(() => {
-      projectPanel.style.display = 'none';
-      projectPanel.classList.remove('fading');
-      introPanel.style.display = 'flex';
-    }, 200);
-  }
-
-  async function showProject(idx) {
-    clearSliders();
-    const p = PROJECTS[idx];
-    introPanel.classList.add('fading');
-    setTimeout(async () => {
-      introPanel.style.display = 'none';
-      introPanel.classList.remove('fading');
-      projectPanel.style.display = 'block';
-      projectPanel.scrollTop = 0;
-      scrollFade.classList.remove('visible');
-
-      // 스켈레톤 표시
-      const content = document.getElementById('project-content');
-      content.innerHTML = `
-        <div class="skeleton-img"></div>
-        <div class="skeleton-hero">
-          <div class="skeleton-line" style="width:38%"></div>
-          <div class="skeleton-line" style="width:55%"></div>
-          <div class="skeleton-title"></div>
-        </div>`;
-
-      try {
-        const res  = await fetch(p.url, { cache: 'no-store' });
-        const html = (await res.text()).replace(/\.\.\/images\//g, 'images/');
-        const doc  = new DOMParser().parseFromString(html, 'text/html');
-
-        content.innerHTML = '';
-        ['.detail-img-hero', '.detail-hero', '.detail-body'].forEach(sel => {
-          const el = doc.querySelector(sel);
-          if (el) content.appendChild(document.adoptNode(el));
-        });
-
-        // 슬라이더 초기화
-        initSliders(content);
-                 initScrollAnimations(content);
-        // 스크롤 힌트 업데이트
-        requestAnimationFrame(updateScrollFade);
-      } catch (e) {
-        content.innerHTML = `<p style="padding:40px;color:var(--text-muted)">Failed to load.</p>`;
-      }
-    }, 200);
   }
 
   // ── Project display ───────────────────────────────────────
