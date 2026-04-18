@@ -1098,3 +1098,24 @@ body.lang-ko [data-lang="ko"]:not(.lang-btn) { display: revert; }
   opacity: 1;
   transform: translateY(0);
 }
+/* ── Image hero fade-in ──────────────────────────────────── */
+.detail-img-hero {
+  animation: heroFadeIn 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: scale(1.03); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Profile entrance animations ────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.col-name    { animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both; }
+.col-role    { animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both; }
+.col-bio     { animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both; }
+.col-links   { animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both; }
+.col-section-label { animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both; }
