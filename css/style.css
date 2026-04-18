@@ -60,10 +60,12 @@ img { display: block; }
 .splash-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 10px;
-  width: min(calc(100vw - 64px), 960px);
-  height: min(calc(100vh - 160px), 500px);
+  grid-template-rows: 40% 60%;
+  gap: 8px;
+  width: 100vw;
+  height: 100vh;
+  padding: 8px;
+  box-sizing: border-box;
 }
 
 .sg-card {
@@ -74,13 +76,12 @@ img { display: block; }
   text-decoration: none;
   cursor: pointer;
   opacity: 0;
-  transform: scale(0.88);
-  transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-              transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: opacity 0.65s cubic-bezier(0.34, 1.4, 0.64, 1),
+              transform 0.65s cubic-bezier(0.34, 1.4, 0.64, 1);
 }
 
 .sg-card:hover {
-  transform: scale(1.04) !important;
+  filter: brightness(1.15);
   z-index: 2;
 }
 
@@ -146,7 +147,7 @@ img { display: block; }
   animation: splash-bounce 2s ease-in-out 1.8s infinite;
 }
 
-.splash.ready .splash-enter { opacity: 1; }
+.splash.phase2 .splash-enter { opacity: 1; }
 .splash-enter:hover { color: var(--text-primary); }
 
 @keyframes splash-bounce {
@@ -281,12 +282,43 @@ img { display: block; }
   animation: splash-bounce 2s ease-in-out 1.8s infinite;
 }
 
-.splash.ready .splash-enter { opacity: 1; }
+.splash.phase2 .splash-enter { opacity: 1; }
 .splash-enter:hover { color: var(--text-primary); }
 
 @keyframes splash-bounce {
   0%, 100% { transform: translateX(-50%) translateY(0); }
   50%       { transform: translateX(-50%) translateY(6px); }
+}
+
+
+/* ── Splash Headline (phase 2) ── */
+.splash-headline {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+  z-index: 3;
+}
+.splash-headline.visible { opacity: 1; }
+.sh-title {
+  font-size: clamp(40px, 5.5vw, 80px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+  text-align: center;
+}
+.sh-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 /* ── Two-column 1:1 layout ── */
