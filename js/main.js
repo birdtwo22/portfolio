@@ -134,30 +134,33 @@
     }
 
     const OFFSETS = [
-      [-80, -80], [0, -80], [0, -80], [80, -80],
-      [-80,   0], [0,   0], [0,   0], [80,   0],
-      [-80,  80], [0,  80], [0,  80], [80,  80],
+      [-100, -80], [0, -80], [0, -80], [100, -80],
+      [-100,   0], [0,   0], [0,   0], [100,   0],
+      [-100,  80], [0,  80], [0,  80], [100,  80],
     ];
     splashCards.forEach((card, idx) => {
       const [dx, dy] = OFFSETS[idx] || [0, -60];
-      card.style.transform = `translate(${dx}px, ${dy}px) scale(0.82)`;
+      card.style.transition = 'none';
+      card.style.transform = `translate(${dx}px, ${dy}px) scale(0.88)`;
     });
     const SCATTER = [0, 1, 4, 2, 5, 8, 3, 6, 9, 7, 10, 11];
     const N = SCATTER.length - 1;
     SCATTER.forEach((idx, i) => {
       setTimeout(() => {
+        splashCards[idx].style.transition = 'opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1)';
         splashCards[idx].style.opacity = '1';
-        splashCards[idx].style.transform = 'none';
-      }, 80 + i * 90);
+        splashCards[idx].style.transform = 'scale(1)';
+      }, 80 + i * 100);
     });
-    setTimeout(() => splash.classList.add('ready'), 80 + N * 90 + 200);
+    setTimeout(() => splash.classList.add('ready'), 80 + N * 100 + 200);
     setTimeout(() => {
       splash.classList.add('phase2');
-      [1, 2].forEach(idx => { splashCards[idx].style.transform = 'translateY(-110px)'; });
-      [5, 6].forEach(idx => { splashCards[idx].style.transform = 'translateY(-70px)'; });
-      [9, 10].forEach(idx => { splashCards[idx].style.transform = 'translateY(110px)'; });
+      splashCards.forEach(card => {
+        card.style.transition = 'transform 1.1s cubic-bezier(0.4,0,0.2,1)';
+        card.style.transform = 'scale(0.82)';
+      });
       document.getElementById('splash-headline').classList.add('visible');
-    }, 80 + N * 90 + 700);
+    }, 80 + N * 100 + 900);
 
     splashEnter.addEventListener('click', e => { e.stopPropagation(); dismissSplash(); });
     splash.addEventListener('click', e => {
