@@ -11,52 +11,42 @@
   <link rel="stylesheet" href="css/style.css?v=3" />
 </head>
 <body>
-
   <!-- ── SPLASH ── -->
   <div id="splash" class="splash">
 
-    <!-- 3D 원통형 카로셀 -->
-    <div class="splash-carousel" id="splash-carousel">
-      <div class="cylinder" id="cylinder">
-        <a class="sc" href="project/monimo.html">
-          <div class="sc-img"><img src="images/monimo.jpg" alt=""></div>
-          <div class="sc-meta"><span class="sc-num">01</span><span class="sc-name">Monimo</span></div>
-        </a>
-        <a class="sc" href="project/nuldam.html">
-          <div class="sc-img"><img src="images/nuldam.jpg" alt=""></div>
-          <div class="sc-meta"><span class="sc-num">02</span><span class="sc-name">Nuldam</span></div>
-        </a>
-        <a class="sc" href="project/ux-guideline.html">
-          <div class="sc-img"><img src="images/ux-guideline.jpg" alt=""></div>
-          <div class="sc-meta"><span class="sc-num">03</span><span class="sc-name">UX Guideline</span></div>
-        </a>
-        <a class="sc" href="project/slim-display.html">
-          <div class="sc-img"><img src="images/slim-display.jpg" alt=""></div>
-          <div class="sc-meta"><span class="sc-num">04</span><span class="sc-name">Slim Display</span></div>
-        </a>
-        <a class="sc" href="project/lg-optical.html">
-          <div class="sc-img"><img src="images/lg-optical.jpg" alt=""></div>
-          <div class="sc-meta"><span class="sc-num">05</span><span class="sc-name">LG Optical</span></div>
-        </a>
-        <a class="sc" href="project/mohey.html">
-          <div class="sc-img" style="background:#1a1a0a"></div>
-          <div class="sc-meta"><span class="sc-num">06</span><span class="sc-name">Mohey</span></div>
-        </a>
-        <a class="sc" href="project/ivi-service.html">
-          <div class="sc-img" style="background:#1a0a2e"></div>
-          <div class="sc-meta"><span class="sc-num">07</span><span class="sc-name">IVI Service</span></div>
-        </a>
-        <a class="sc" href="project/ccnc.html">
-   <div class="sc-img"><img src="images/20260259.png" alt="CCNC IVI"></div>
-          <div class="sc-meta"><span class="sc-num">08</span><span class="sc-name">CCNC IVI</span></div>
-        </a>
-      </div><!-- /.cylinder -->
-    </div><!-- /.splash-carousel -->
-
-    <!-- 중앙 문구 -->
-    <div class="splash-inner">
-      <p class="splash-quote">Good design<br>is invisible.</p>
-      <p class="splash-attr">Seui Park · UX/UI Designer · Seoul</p>
+    <div class="splash-grid" id="splash-grid">
+      <a class="sg-card" href="project/monimo.html">
+        <div class="sg-img"><img src="images/monimo.jpg" alt="Monimo App Card"></div>
+        <div class="sg-meta"><span class="sg-num">01</span><span class="sg-name">Monimo App Card</span></div>
+      </a>
+      <a class="sg-card" href="project/nuldam.html">
+        <div class="sg-img"><img src="images/nuldam.jpg" alt="Nuldam E-Commerce"></div>
+        <div class="sg-meta"><span class="sg-num">02</span><span class="sg-name">Nuldam E-Commerce</span></div>
+      </a>
+      <a class="sg-card" href="project/ux-guideline.html">
+        <div class="sg-img"><img src="images/ux-guideline.jpg" alt="UX Guideline System"></div>
+        <div class="sg-meta"><span class="sg-num">03</span><span class="sg-name">UX Guideline</span></div>
+      </a>
+      <a class="sg-card" href="project/slim-display.html">
+        <div class="sg-img"><img src="images/slim-display.jpg" alt="Slim Display HUD"></div>
+        <div class="sg-meta"><span class="sg-num">04</span><span class="sg-name">Slim Display HUD</span></div>
+      </a>
+      <a class="sg-card" href="project/lg-optical.html">
+        <div class="sg-img"><img src="images/lg-optical.jpg" alt="LG Optical Display"></div>
+        <div class="sg-meta"><span class="sg-num">05</span><span class="sg-name">LG Optical</span></div>
+      </a>
+      <a class="sg-card" href="project/mohey.html">
+        <div class="sg-img" style="background:#1a1a0a"></div>
+        <div class="sg-meta"><span class="sg-num">06</span><span class="sg-name">Mohey Platform</span></div>
+      </a>
+      <a class="sg-card" href="project/ivi-service.html">
+        <div class="sg-img" style="background:#1a0a2e"></div>
+        <div class="sg-meta"><span class="sg-num">07</span><span class="sg-name">IVI Service</span></div>
+      </a>
+      <a class="sg-card" href="project/ccnc.html">
+        <div class="sg-img"><img src="images/20260259.png" alt="CCNC IVI"></div>
+        <div class="sg-meta"><span class="sg-num">08</span><span class="sg-name">CCNC IVI</span></div>
+      </a>
     </div>
 
     <button class="splash-enter" id="splash-enter">
@@ -65,7 +55,6 @@
     </button>
 
   </div>
-
   <div class="layout">
 
     <!-- ── LEFT : Sidebar ── -->
