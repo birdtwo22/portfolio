@@ -1100,7 +1100,7 @@ body.lang-ko [data-lang="ko"]:not(.lang-btn) { display: revert; }
 }
 /* ── Image hero fade-in ──────────────────────────────────── */
 .detail-img-hero {
-  animation: heroFadeIn 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation: heroFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 @keyframes heroFadeIn {
