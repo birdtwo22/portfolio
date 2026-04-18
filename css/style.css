@@ -1087,3 +1087,14 @@ body.lang-ko [data-lang="ko"]:not(.lang-btn) { display: revert; }
   .detail-hero, .detail-body { padding-left: 20px; padding-right: 20px; }
   .detail-meta-row { gap: 20px; }
 }
+/* ── Scroll animations ───────────────────────────────────── */
+.scroll-hidden {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.scroll-hidden.scroll-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
