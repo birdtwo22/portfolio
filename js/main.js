@@ -157,6 +157,7 @@
       dismissed = true;
       sessionStorage.setItem('sp-visited', '1');
       splash.classList.add('hidden');
+             setTimeout(initAboutAnimations, 700);
 
       // 페이드아웃 중 wheel 이벤트가 아래 패널로 새는 것 방지
       const blockScroll = e => e.preventDefault();
@@ -522,8 +523,9 @@
     });
   }
 
-  initAboutAnimations();
-
+  if (sessionStorage.getItem('sp-visited')) {
+    setTimeout(initAboutAnimations, 50);
+  }
   // ── Clock ─────────────────────────────────────────────────
   const clockEl = document.getElementById('clock');
   if (clockEl) {
