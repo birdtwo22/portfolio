@@ -155,10 +155,11 @@
     setTimeout(() => splash.classList.add('ready'), 80 + N * 100 + 200);
     setTimeout(() => {
       splash.classList.add('phase2');
-      splashCards.forEach(card => {
-        card.style.transition = 'transform 1.1s cubic-bezier(0.4,0,0.2,1)';
-        card.style.transform = 'scale(0.82)';
-      });
+      const T = 'transform 1.1s cubic-bezier(0.4,0,0.2,1)';
+      [0,1,2,3].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(-160px)';});
+      [4,5].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(-100px)';});
+      [6,7].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(100px)';});
+      [8,9,10,11].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(160px)';});
       document.getElementById('splash-headline').classList.add('visible');
     }, 80 + N * 100 + 900);
 
