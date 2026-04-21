@@ -147,22 +147,22 @@
     const N = SCATTER.length - 1;
     SCATTER.forEach((idx, i) => {
       setTimeout(() => {
-        splashCards[idx].style.transition = 'opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1), background-color 0.6s ease';
+        splashCards[idx].style.transition = 'opacity 0.55s cubic-bezier(0.16,1,0.3,1), transform 0.55s cubic-bezier(0.16,1,0.3,1), background-color 0.6s ease';
         splashCards[idx].style.opacity = '1';
         splashCards[idx].style.transform = 'translateY(0)';
-      }, 80 + i * 100);
+      }, 60 + i * 60);
     });
-    setTimeout(() => splash.classList.add('ready'), 80 + N * 100 + 200);
+    setTimeout(() => splash.classList.add('ready'), 60 + N * 60 + 150);
     setTimeout(() => {
       splash.classList.add('phase2');
-      const T = 'transform 1.1s cubic-bezier(0.4,0,0.2,1), background-color 0.6s ease';
+      const T = 'transform 0.85s cubic-bezier(0.4,0,0.2,1), background-color 0.6s ease';
       [0,3,4,7,8,11].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(0)';});
-      [1,5].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(-330px)';});
-      splashCards[9].style.transition=T;splashCards[9].style.transform='translateY(60px)';
-      [2,6].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(-330px)';});
-      splashCards[10].style.transition=T;splashCards[10].style.transform='translateY(60px)';
+      [1,5].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(-400px)';});
+      splashCards[9].style.transition=T;splashCards[9].style.transform='translateY(100px)';
+      [2,6].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(-400px)';});
+      splashCards[10].style.transition=T;splashCards[10].style.transform='translateY(100px)';
       document.getElementById('splash-headline').classList.add('visible');
-    }, 80 + N * 100 + 900);
+    }, 60 + N * 60 + 600);
 
     splashCards.forEach(card => {
       card.addEventListener('click', e => {

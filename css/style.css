@@ -64,7 +64,7 @@ img { display: block; }
   pointer-events: none;
   z-index: 2;
   opacity: 0;
-  transition: opacity 1.4s ease 0.4s;
+  transition: opacity 1.0s ease 0.2s;
 }
 .splash.phase2::after {
   opacity: 1;
@@ -343,7 +343,7 @@ img { display: block; }
   justify-content: center;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 10;
 }
 .splash-headline.visible { opacity: 1; }
