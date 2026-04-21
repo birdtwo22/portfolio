@@ -147,7 +147,7 @@
     const N = SCATTER.length - 1;
     SCATTER.forEach((idx, i) => {
       setTimeout(() => {
-        splashCards[idx].style.transition = 'opacity 0.5s cubic-bezier(0.0,0.0,0.2,1), transform 0.7s cubic-bezier(0.34,1.56,0.64,1), background-color 0.6s ease';
+        splashCards[idx].style.transition = 'opacity 0.5s cubic-bezier(0.0,0.0,0.2,1), transform 0.8s cubic-bezier(0.34,1.2,0.64,1), background-color 0.6s ease';
         splashCards[idx].style.opacity = '1';
         splashCards[idx].style.transform = 'translateY(0)';
       }, 60 + i * 60);
@@ -155,7 +155,7 @@
     setTimeout(() => splash.classList.add('ready'), 60 + N * 60 + 150);
     setTimeout(() => {
       splash.classList.add('phase2');
-      const T = 'transform 1s cubic-bezier(0.34,1.2,0.64,1), background-color 0.6s ease';
+      const T = 'transform 0.8s cubic-bezier(0.34,1.2,0.64,1), background-color 0.6s ease';
       [0,3,4,7,8,11].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(0)';});
       [1,5].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(-400px)';});
       splashCards[9].style.transition=T;splashCards[9].style.transform='translateY(100px)';
