@@ -141,13 +141,13 @@
     splashCards.forEach((card, idx) => {
       const [dx, dy] = OFFSETS[idx] || [0, -60];
       card.style.transition = 'none';
-      card.style.transform = `translate(${dx}px, ${dy}px) scale(0.88)`;
+      card.style.transform = `translate(${dx}px, ${dy}px) scale(0.88) rotate(12deg)`;
     });
     const SCATTER = [0, 1, 4, 2, 5, 8, 3, 6, 9, 7, 10, 11];
     const N = SCATTER.length - 1;
     SCATTER.forEach((idx, i) => {
       setTimeout(() => {
-        splashCards[idx].style.transition = 'opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1)';
+        splashCards[idx].style.transition = 'opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1), background-color 0.6s ease';
         splashCards[idx].style.opacity = '1';
         const col = idx % 4;
         splashCards[idx].style.transform = (col === 1 || col === 3) ? 'translateY(65px)' : 'translateY(0)';
@@ -156,7 +156,7 @@
     setTimeout(() => splash.classList.add('ready'), 80 + N * 100 + 200);
     setTimeout(() => {
       splash.classList.add('phase2');
-      const T = 'transform 1.1s cubic-bezier(0.4,0,0.2,1)';
+      const T = 'transform 1.1s cubic-bezier(0.4,0,0.2,1), background-color 0.6s ease';
       [0,3].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(-40px)';});
       [8,11].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(40px)';});
       [1,5].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(-210px)';});
@@ -165,6 +165,14 @@
       [6,10].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(210px)';});
       document.getElementById('splash-headline').classList.add('visible');
     }, 80 + N * 100 + 900);
+
+    splashCards.forEach(card => {
+      card.addEventListener('click', e => {
+        e.stopPropagation();
+        const h = Math.floor(Math.random() * 360);
+        card.style.backgroundColor = `hsl(${h},50%,14%)`;
+      });
+    });
 
     splashEnter.addEventListener('click', e => { e.stopPropagation(); dismissSplash(); });
     splash.addEventListener('click', e => {
