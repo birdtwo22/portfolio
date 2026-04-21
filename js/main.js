@@ -158,10 +158,10 @@
       splash.classList.add('phase2');
       const T = 'transform 1.1s cubic-bezier(0.4,0,0.2,1), background-color 0.6s ease';
       [0,3,4,7,8,11].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(0)';});
-      [1,5].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(-210px)';});
-      splashCards[9].style.transition=T;splashCards[9].style.transform='translateY(210px)';
-      [2,6].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(-210px)';});
-      splashCards[10].style.transition=T;splashCards[10].style.transform='translateY(210px)';
+      [1,5].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(-700px)';});
+      splashCards[9].style.transition=T;splashCards[9].style.transform='translateY(700px)';
+      [2,6].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(-700px)';});
+      splashCards[10].style.transition=T;splashCards[10].style.transform='translateY(700px)';
       document.getElementById('splash-headline').classList.add('visible');
     }, 80 + N * 100 + 900);
 
