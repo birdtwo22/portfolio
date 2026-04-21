@@ -155,7 +155,7 @@
     setTimeout(() => splash.classList.add('ready'), 60 + N * 60 + 150);
     setTimeout(() => {
       splash.classList.add('phase2');
-      const T = 'transform 0.9s cubic-bezier(0.4,-0.2,0.8,0.9), background-color 0.6s ease';
+      const T = 'transform 1s cubic-bezier(0.34,1.2,0.64,1), background-color 0.6s ease';
       [0,3,4,7,8,11].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(0)';});
       [1,5].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(-400px)';});
       splashCards[9].style.transition=T;splashCards[9].style.transform='translateY(100px)';
