@@ -166,6 +166,7 @@
 
     splashCards.forEach(card => {
       card.addEventListener('click', e => {
+        e.preventDefault();
         e.stopPropagation();
         const h = Math.floor(Math.random() * 360);
         card.style.backgroundColor = `hsl(${h},50%,14%)`;
