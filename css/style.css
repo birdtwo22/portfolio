@@ -56,6 +56,20 @@ img { display: block; }
   pointer-events: none;
 }
 
+.splash::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 70% at center, transparent 35%, rgba(0,0,0,0.82) 100%);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 1.4s ease 0.4s;
+}
+.splash.phase2::after {
+  opacity: 1;
+}
+
 /* ── Bento Grid ── */
 .splash-grid {
   display: grid;
