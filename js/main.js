@@ -224,41 +224,43 @@
     document.getElementById('project-panel').style.display = 'none';
     clearSliders();
   }
-  function showProject(idx) {
+  async function showProject(idx) {
+    clearSliders();
     const p = PROJECTS[idx];
     if (!p) return;
     const lang = document.querySelector('.lang-btn.active')?.dataset.lang || 'en';
-    const heroHtml = p.img
-      ? `<img src="${p.img}" alt="${p.titleEn}" class="proj-hero-img" />`
-      : `<div class="proj-hero-placeholder">${(p.placeholder || p.titleEn).replace('\n', '<br>')}</div>`;
-    document.getElementById('project-content').innerHTML = `
-      <div class="detail-hero">${heroHtml}</div>
-      <div class="detail-section">
-        <span class="detail-label">${p.num} · ${p.category}</span>
-        <h1 class="detail-title">
-          <span data-lang="en">${p.titleEn}</span>
-          <span data-lang="ko">${p.titleKo}</span>
-        </h1>
-        <p class="detail-client">${p.client}</p>
-        <p class="detail-stat">${p.stat}</p>
-        <p class="detail-desc">
-          <span data-lang="en">${p.descEn}</span>
-          <span data-lang="ko">${p.descKo}</span>
-        </p>
-        <a href="${p.url}" class="detail-cta">
-          <span data-lang="en">View case study \u2192</span>
-          <span data-lang="ko">\ucf00\uc774\uc2a4 \uc2a4\ud130\ub514 \ubcf4\uae30 \u2192</span>
-        </a>
-      </div>
-    `;
+
     document.getElementById('intro-panel').style.display = 'none';
     const panel = document.getElementById('project-panel');
     panel.style.display = '';
     panel.scrollTop = 0;
-    applyLang(lang);
-    clearSliders();
-    initSliders(panel);
-    initScrollAnimations(panel);
+
+    const content = document.getElementById('project-content');
+    content.innerHTML = `
+      <div class="skeleton-img"></div>
+      <div class="skeleton-hero">
+        <div class="skeleton-line" style="width:38%"></div>
+        <div class="skeleton-line" style="width:55%"></div>
+        <div class="skeleton-title"></div>
+      </div>`;
+
+    try {
+      const res  = await fetch(p.url, { cache: 'no-store' });
+      const html = (await res.text()).replace(/\.\.\/images\//g, 'images/');
+      const doc  = new DOMParser().parseFromString(html, 'text/html');
+
+      content.innerHTML = '';
+      ['.detail-img-hero', '.detail-hero', '.detail-body'].forEach(sel => {
+        const el = doc.querySelector(sel);
+        if (el) content.appendChild(document.adoptNode(el));
+      });
+
+      applyLang(lang);
+      initSliders(content);
+      initScrollAnimations(panel);
+    } catch (e) {
+      content.innerHTML = `<p style="padding:40px;color:var(--text-muted)">Failed to load.</p>`;
+    }
   }
   // ── Image slider ─────────────────────────────────────────
 
