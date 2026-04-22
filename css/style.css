@@ -83,6 +83,8 @@ img { display: block; }
 }
 
 .sg-card {
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
   position: relative;
   border-radius: 10px;
   overflow: hidden;

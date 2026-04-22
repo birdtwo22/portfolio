@@ -155,33 +155,31 @@
     const SCATTER_DONE = 60 + N * 60 + 150;
     setTimeout(() => splash.classList.add('ready'), SCATTER_DONE);
 
-    // Step 2: stagger rearrange + grid scale down
+    // Step 2: subtle stagger rearrange (GPU only, no grid scale)
     setTimeout(() => {
-      splashGrid.style.transition = 'transform 0.9s cubic-bezier(0.34,1.2,0.64,1)';
-      splashGrid.style.transform = 'scale(0.90)';
-      const T2 = 'transform 0.9s cubic-bezier(0.34,1.2,0.64,1)';
-      const S2 = [-30, 60, 40, -50,  40, -50, -30, 60,  -40, 70, 50, -40];
+      const T2 = 'transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      const S2 = [-18, 32, 22, -28,  22, -32, -18, 32,  -28, 38, 28, -22];
       splashCards.forEach((card, i) => {
         card.style.transition = T2;
-        card.style.transform = `translateY(${S2[i]}px)`;
+        card.style.transform = `translate3d(0, ${S2[i]}px, 0)`;
       });
-    }, SCATTER_DONE + 300);
+    }, SCATTER_DONE + 200);
 
     // Step 3: zigzag opening → reveal headline
     setTimeout(() => {
       splash.classList.add('phase2');
-      const T3 = 'transform 0.8s cubic-bezier(0.34,1.2,0.64,1), background-color 0.6s ease';
+      const T3 = 'transform 0.7s cubic-bezier(0.4, 0, 1, 1), background-color 0.4s ease';
       [0,1,2,3].forEach((i,j)=>{
-        setTimeout(()=>{splashCards[i].style.transition=T3;splashCards[i].style.transform='translateY(-500px)';}, j*40);
+        setTimeout(()=>{splashCards[i].style.transition=T3;splashCards[i].style.transform='translate3d(0,-110vh,0)';}, j*35);
       });
       [4,5,6,7].forEach((i,j)=>{
-        setTimeout(()=>{splashCards[i].style.transition=T3;splashCards[i].style.transform='translateY(200px)';}, j*40);
+        setTimeout(()=>{splashCards[i].style.transition=T3;splashCards[i].style.transform='translate3d(0,60vh,0)';}, j*35);
       });
       [8,9,10,11].forEach((i,j)=>{
-        setTimeout(()=>{splashCards[i].style.transition=T3;splashCards[i].style.transform='translateY(-500px)';}, j*40);
+        setTimeout(()=>{splashCards[i].style.transition=T3;splashCards[i].style.transform='translate3d(0,-110vh,0)';}, j*35);
       });
       document.getElementById('splash-headline').classList.add('visible');
-    }, SCATTER_DONE + 300 + 1100);
+    }, SCATTER_DONE + 200 + 1100);
 
     splashCards.forEach(card => {
       card.addEventListener('click', e => {
