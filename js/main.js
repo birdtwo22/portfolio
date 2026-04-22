@@ -242,7 +242,7 @@
   const colName = document.querySelector('.col-name');
   if (colName) colName.addEventListener('click', showIntro);
   const aboutLink = document.getElementById('about-link');
-  if (aboutLink) aboutLink.addEventListener('click', showIntro);
+  if (aboutLink) aboutLink.addEventListener('click', e => { e.preventDefault(); showIntro(); });
 
   // ── Language toggle ──────────────────────────────────────
   function applyLang(lang) {

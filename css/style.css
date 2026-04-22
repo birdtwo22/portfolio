@@ -488,11 +488,6 @@ img { display: block; }
   0%   { background-position: 0% center; }
   100% { background-position: -250% center; }
 }
-.col-section-about {
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-.col-section-about:hover { color: var(--accent); }
 
 .col-role {
   font-size: 14px;
