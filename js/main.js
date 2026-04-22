@@ -259,24 +259,28 @@
   function showIntro() {
     listItems.forEach(i => i.classList.remove('active'));
     activeIdx = -1;
+    clearSliders();
     const projectPanel = document.getElementById('project-panel');
     const introPanel   = document.getElementById('intro-panel');
-    if (projectPanel.style.display === 'none') return;
-    projectPanel.style.transition = 'opacity 0.25s ease';
-    projectPanel.style.opacity = '0';
-    setTimeout(() => {
-      projectPanel.style.display = 'none';
-      projectPanel.style.opacity = '';
-      projectPanel.style.transition = '';
-      introPanel.style.display = '';
-      introPanel.style.opacity = '0';
-      introPanel.style.transition = 'opacity 0.3s ease';
-      requestAnimationFrame(() => {
-        introPanel.style.opacity = '1';
-        setTimeout(() => { introPanel.style.transition = ''; introPanel.style.opacity = ''; }, 320);
-      });
-      clearSliders();
-    }, 260);
+    const onProject = projectPanel.style.display !== 'none';
+
+    if (onProject) {
+      // 프로젝트 패널 → 인트로로 전환
+      projectPanel.style.transition = 'opacity 0.25s ease';
+      projectPanel.style.opacity = '0';
+      setTimeout(() => {
+        projectPanel.style.cssText = 'display:none;';
+        introPanel.style.cssText = 'display:;opacity:0;';
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          introPanel.style.transition = 'opacity 0.3s ease';
+          introPanel.style.opacity = '1';
+          setTimeout(() => { introPanel.style.cssText = ''; }, 320);
+        }));
+      }, 260);
+    } else {
+      // 이미 인트로 — 상단으로 스크롤
+      introPanel.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
   async function showProject(idx) {
     clearSliders();
