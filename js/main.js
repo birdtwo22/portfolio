@@ -238,9 +238,14 @@
     });
   });
 
-  // 이름 / About 클릭 → 소개 화면으로 돌아가기
+  // 이름 글자 분리 + 클릭 핸들러
   const colName = document.querySelector('.col-name');
-  if (colName) colName.addEventListener('click', showIntro);
+  if (colName) {
+    colName.innerHTML = [...colName.textContent.trim()].map(ch =>
+      `<span class="letter">${ch === ' ' ? '&nbsp;' : ch}</span>`
+    ).join('');
+    colName.addEventListener('click', showIntro);
+  }
   const aboutLink = document.getElementById('about-link');
   if (aboutLink) aboutLink.addEventListener('click', e => { e.preventDefault(); showIntro(); });
 
