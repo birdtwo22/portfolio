@@ -164,12 +164,53 @@
   // ── Project display ───────────────────────────────────────
   let activeIdx = -1;
 
+  // ── Cursor thumbnail ──────────────────────────────────────
+  const THUMB_IMGS = [
+    'images/monimo.jpg',
+    'images/nuldam.jpg',
+    'images/ux-guideline.jpg',
+    'images/slim-display.jpg',
+    'images/lg-optical.jpg',
+    'images/Mohey.png',
+    'images/20260260.png',
+    'images/20260259.png',
+  ];
+
+  const cursorThumb = document.createElement('div');
+  cursorThumb.className = 'cursor-thumb';
+  const cursorImg = document.createElement('img');
+  cursorThumb.appendChild(cursorImg);
+  document.body.appendChild(cursorThumb);
+
+  let tx = 0, ty = 0, cx = 0, cy = 0;
+
+  (function animateThumb() {
+    cx += (tx - cx) * 0.1;
+    cy += (ty - cy) * 0.1;
+    cursorThumb.style.transform = `translate(${cx}px,${cy}px)`;
+    requestAnimationFrame(animateThumb);
+  })();
+
+  document.addEventListener('mousemove', e => {
+    tx = e.clientX + 24;
+    ty = e.clientY - 80;
+  });
+
   // ── Project list click ────────────────────────────────────
   const listItems = document.querySelectorAll('.proj-list-item');
 
   listItems.forEach(item => {
+    const idx = parseInt(item.dataset.idx);
+    item.addEventListener('mouseenter', () => {
+      if (THUMB_IMGS[idx]) {
+        cursorImg.src = THUMB_IMGS[idx];
+        cursorThumb.classList.add('active');
+      }
+    });
+    item.addEventListener('mouseleave', () => {
+      cursorThumb.classList.remove('active');
+    });
     item.addEventListener('click', () => {
-      const idx = parseInt(item.dataset.idx);
       activeIdx = idx;
       listItems.forEach(i => i.classList.remove('active'));
       item.classList.add('active');
