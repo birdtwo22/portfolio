@@ -152,17 +152,36 @@
         splashCards[idx].style.transform = 'translateY(0)';
       }, 60 + i * 60);
     });
-    setTimeout(() => splash.classList.add('ready'), 60 + N * 60 + 150);
+    const SCATTER_DONE = 60 + N * 60 + 150;
+    setTimeout(() => splash.classList.add('ready'), SCATTER_DONE);
+
+    // Step 2: stagger rearrange + grid scale down
+    setTimeout(() => {
+      splashGrid.style.transition = 'transform 0.9s cubic-bezier(0.34,1.2,0.64,1)';
+      splashGrid.style.transform = 'scale(0.90)';
+      const T2 = 'transform 0.9s cubic-bezier(0.34,1.2,0.64,1)';
+      const S2 = [-30, 60, 40, -50,  40, -50, -30, 60,  -40, 70, 50, -40];
+      splashCards.forEach((card, i) => {
+        card.style.transition = T2;
+        card.style.transform = `translateY(${S2[i]}px)`;
+      });
+    }, SCATTER_DONE + 300);
+
+    // Step 3: zigzag opening → reveal headline
     setTimeout(() => {
       splash.classList.add('phase2');
-      const T = 'transform 0.8s cubic-bezier(0.34,1.2,0.64,1), background-color 0.6s ease';
-      [0,3,4,7,8,11].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(0)';});
-      [1,5].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(-400px)';});
-      splashCards[9].style.transition=T;splashCards[9].style.transform='translateY(100px)';
-      [2,6].forEach(i=>{splashCards[i].style.transition=T;splashCards[i].style.transform='translateY(-400px)';});
-      splashCards[10].style.transition=T;splashCards[10].style.transform='translateY(100px)';
+      const T3 = 'transform 0.8s cubic-bezier(0.34,1.2,0.64,1), background-color 0.6s ease';
+      [0,1,2,3].forEach((i,j)=>{
+        setTimeout(()=>{splashCards[i].style.transition=T3;splashCards[i].style.transform='translateY(-500px)';}, j*40);
+      });
+      [4,5,6,7].forEach((i,j)=>{
+        setTimeout(()=>{splashCards[i].style.transition=T3;splashCards[i].style.transform='translateY(200px)';}, j*40);
+      });
+      [8,9,10,11].forEach((i,j)=>{
+        setTimeout(()=>{splashCards[i].style.transition=T3;splashCards[i].style.transform='translateY(-500px)';}, j*40);
+      });
       document.getElementById('splash-headline').classList.add('visible');
-    }, 60 + N * 60 + 600);
+    }, SCATTER_DONE + 300 + 1100);
 
     splashCards.forEach(card => {
       card.addEventListener('click', e => {
