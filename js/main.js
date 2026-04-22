@@ -262,22 +262,11 @@
     listItems.forEach(i => i.classList.remove('active'));
     activeIdx = -1;
     clearSliders();
-    const projectPanel = document.getElementById('project-panel');
-    const introPanel   = document.getElementById('intro-panel');
-
-    projectPanel.style.display = 'none';
-    introPanel.style.display   = '';
-    introPanel.style.opacity   = '0';
+    document.getElementById('project-panel').style.display = 'none';
+    const introPanel = document.getElementById('intro-panel');
+    introPanel.style.display = '';
     introPanel.scrollTo({ top: 0 });
-
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      introPanel.style.transition = 'opacity 0.35s ease';
-      introPanel.style.opacity    = '1';
-      setTimeout(() => {
-        introPanel.style.transition = '';
-        introPanel.style.opacity    = '';
-      }, 380);
-    }));
+    initAboutAnimations();
   }
   async function showProject(idx) {
     clearSliders();
