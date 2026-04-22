@@ -155,28 +155,41 @@
     const SCATTER_DONE = 60 + N * 60 + 150;
     setTimeout(() => splash.classList.add('ready'), SCATTER_DONE);
 
-    // Step 2: subtle stagger rearrange (GPU only, no grid scale)
+    // Step 2: column-based stagger (col1↓ col2↑ col3↓ col4↑)
     setTimeout(() => {
       const T2 = 'transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-      const S2 = [-18, 32, 22, -28,  22, -32, -18, 32,  -28, 38, 28, -22];
+      const S2 = [22,-22,22,-22, 22,-22,22,-22, 22,-22,22,-22];
       splashCards.forEach((card, i) => {
+        card.style.willChange = 'transform, opacity';
         card.style.transition = T2;
-        card.style.transform = `translate3d(0, ${S2[i]}px, 0)`;
+        card.style.transform = `translate3d(0,${S2[i]}px,0)`;
       });
     }, SCATTER_DONE + 200);
 
-    // Step 3: zigzag opening → reveal headline
+    // Step 3: zigzag + fade out
     setTimeout(() => {
       splash.classList.add('phase2');
-      const T3 = 'transform 0.7s cubic-bezier(0.4, 0, 1, 1), background-color 0.4s ease';
+      const T3 = 'transform 1s cubic-bezier(0.4,0,0.8,1), opacity 0.6s ease';
       [0,1,2,3].forEach((i,j)=>{
-        setTimeout(()=>{splashCards[i].style.transition=T3;splashCards[i].style.transform='translate3d(0,-110vh,0)';}, j*35);
+        setTimeout(()=>{
+          splashCards[i].style.transition=T3;
+          splashCards[i].style.transform='translate3d(0,-110vh,0)';
+          splashCards[i].style.opacity='0';
+        }, j*40);
       });
       [4,5,6,7].forEach((i,j)=>{
-        setTimeout(()=>{splashCards[i].style.transition=T3;splashCards[i].style.transform='translate3d(0,60vh,0)';}, j*35);
+        setTimeout(()=>{
+          splashCards[i].style.transition=T3;
+          splashCards[i].style.transform='translate3d(0,60vh,0)';
+          splashCards[i].style.opacity='0';
+        }, j*40);
       });
       [8,9,10,11].forEach((i,j)=>{
-        setTimeout(()=>{splashCards[i].style.transition=T3;splashCards[i].style.transform='translate3d(0,-110vh,0)';}, j*35);
+        setTimeout(()=>{
+          splashCards[i].style.transition=T3;
+          splashCards[i].style.transform='translate3d(0,-110vh,0)';
+          splashCards[i].style.opacity='0';
+        }, j*40);
       });
       document.getElementById('splash-headline').classList.add('visible');
     }, SCATTER_DONE + 200 + 1100);
