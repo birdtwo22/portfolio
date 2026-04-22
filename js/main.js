@@ -111,8 +111,6 @@
     // ── Splash screen ────────────────────────────────────────
   const splash      = document.getElementById('splash');
   const splashEnter = document.getElementById('splash-enter');
-  const splashGrid  = document.getElementById('splash-grid');
-  const splashCards = Array.from(splashGrid.querySelectorAll('.sg-card'));
 
   if (sessionStorage.getItem('sp-visited')) {
     splash.style.display = 'none';
@@ -133,80 +131,30 @@
       }, 750);
     }
 
-    const OFFSETS = [
-      [-100, -80], [0, -80], [0, -80], [100, -80],
-      [-100,   0], [0,   0], [0,   0], [100,   0],
-      [-100,  80], [0,  80], [0,  80], [100,  80],
-    ];
-    splashCards.forEach((card, idx) => {
-      const [dx, dy] = OFFSETS[idx] || [0, -60];
-      card.style.transition = 'none';
-      card.style.transform = `translate(${dx}px, ${dy}px) scale(0.88) rotate(12deg)`;
-    });
-    const SCATTER = [0, 1, 4, 2, 5, 8, 3, 6, 9, 7, 10, 11];
-    const N = SCATTER.length - 1;
-    SCATTER.forEach((idx, i) => {
+    // Line mask reveal
+    const lines = Array.from(document.querySelectorAll('.st-line'));
+    const sub   = document.querySelector('.st-sub');
+    const T = 'transform 1s cubic-bezier(0.16, 1, 0.3, 1)';
+
+    lines.forEach((line, i) => {
       setTimeout(() => {
-        splashCards[idx].style.transition = 'opacity 0.5s cubic-bezier(0.0,0.0,0.2,1), transform 0.8s cubic-bezier(0.34,1.2,0.64,1), background-color 0.6s ease';
-        splashCards[idx].style.opacity = '1';
-        splashCards[idx].style.transform = 'translateY(0)';
-      }, 60 + i * 60);
+        line.style.transition = T;
+        line.style.transform = 'translateY(0)';
+      }, 300 + i * 180);
     });
-    const SCATTER_DONE = 60 + N * 60 + 150;
-    setTimeout(() => splash.classList.add('ready'), SCATTER_DONE);
 
-    // Step 2: column-based stagger (col1↓ col2↑ col3↓ col4↑)
     setTimeout(() => {
-      const T2 = 'transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-      const S2 = [22,-22,22,-22, 22,-22,22,-22, 22,-22,22,-22];
-      splashCards.forEach((card, i) => {
-        card.style.willChange = 'transform, opacity';
-        card.style.transition = T2;
-        card.style.transform = `translate3d(0,${S2[i]}px,0)`;
-      });
-    }, SCATTER_DONE + 200);
+      sub.style.transition = 'transform 0.9s cubic-bezier(0.16, 1, 0.3, 1)';
+      sub.style.transform = 'translateY(0)';
+    }, 300 + lines.length * 180 + 80);
 
-    // Step 3: zigzag + fade out
     setTimeout(() => {
-      splash.classList.add('phase2');
-      const T3 = 'transform 1s cubic-bezier(0.4,0,0.8,1), opacity 0.6s ease';
-      [0,1,2,3].forEach((i,j)=>{
-        setTimeout(()=>{
-          splashCards[i].style.transition=T3;
-          splashCards[i].style.transform='translate3d(0,-110vh,0)';
-          splashCards[i].style.opacity='0';
-        }, j*40);
-      });
-      [4,5,6,7].forEach((i,j)=>{
-        setTimeout(()=>{
-          splashCards[i].style.transition=T3;
-          splashCards[i].style.transform='translate3d(0,60vh,0)';
-          splashCards[i].style.opacity='0';
-        }, j*40);
-      });
-      [8,9,10,11].forEach((i,j)=>{
-        setTimeout(()=>{
-          splashCards[i].style.transition=T3;
-          splashCards[i].style.transform='translate3d(0,-110vh,0)';
-          splashCards[i].style.opacity='0';
-        }, j*40);
-      });
-      document.getElementById('splash-headline').classList.add('visible');
-    }, SCATTER_DONE + 200 + 1100);
-
-    splashCards.forEach(card => {
-      card.addEventListener('click', e => {
-        e.preventDefault();
-        e.stopPropagation();
-        const h = Math.floor(Math.random() * 360);
-        card.style.backgroundColor = `hsl(${h},50%,14%)`;
-      });
-    });
+      splashEnter.style.transition = 'opacity 0.8s ease';
+      splashEnter.style.opacity = '1';
+    }, 300 + lines.length * 180 + 500);
 
     splashEnter.addEventListener('click', e => { e.stopPropagation(); dismissSplash(); });
-    splash.addEventListener('click', e => {
-      if (!e.target.closest('.sg-card')) dismissSplash();
-    });
+    splash.addEventListener('click', dismissSplash);
     document.addEventListener('keydown', e => {
       if (dismissed) return;
       if (e.key === 'Enter' || e.key === 'Escape') dismissSplash();

@@ -46,6 +46,8 @@ img { display: block; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
@@ -55,6 +57,64 @@ img { display: block; }
   opacity: 0;
   pointer-events: none;
 }
+
+/* ── Line mask reveal ── */
+.splash-text {
+  text-align: center;
+}
+
+.st-line-wrap {
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+
+.st-sub-wrap {
+  margin-top: 20px;
+}
+
+.st-line {
+  display: block;
+  font-size: clamp(48px, 6.5vw, 96px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: #ffffff;
+  transform: translateY(110%);
+}
+
+.st-sub {
+  display: block;
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transform: translateY(110%);
+}
+
+.splash-enter {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.3);
+  font-size: 11px;
+  font-family: var(--font);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  z-index: 5;
+  opacity: 0;
+  transition: color var(--ease);
+  animation: splash-bounce 2s ease-in-out infinite;
+}
+
+.splash-enter:hover { color: rgba(255,255,255,0.8); }
 
 .splash::after {
   content: '';
