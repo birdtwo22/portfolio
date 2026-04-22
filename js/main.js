@@ -183,7 +183,6 @@
   document.body.appendChild(cursorThumb);
 
   let tx = 0, ty = 0, cx = 0, cy = 0;
-  let lastMX = 0, lastMY = 0, distAccum = 0, thumbImgIdx = 0;
 
   (function animateThumb() {
     cx += (tx - cx) * 0.1;
@@ -195,22 +194,6 @@
   document.addEventListener('mousemove', e => {
     tx = e.clientX + 20;
     ty = e.clientY - 90;
-
-    const dx = e.clientX - lastMX;
-    const dy = e.clientY - lastMY;
-    lastMX = e.clientX; lastMY = e.clientY;
-    distAccum += Math.sqrt(dx * dx + dy * dy);
-
-    cursorThumb.classList.add('active');
-
-    if (distAccum > 120) {
-      distAccum = 0;
-      let next;
-      do { next = Math.floor(Math.random() * THUMB_IMGS.length); }
-      while (next === thumbImgIdx && THUMB_IMGS.length > 1);
-      thumbImgIdx = next;
-      cursorImg.src = THUMB_IMGS[thumbImgIdx];
-    }
   });
 
   // ── Project list click ────────────────────────────────────
@@ -218,6 +201,13 @@
 
   listItems.forEach(item => {
     const idx = parseInt(item.dataset.idx);
+    item.addEventListener('mouseenter', () => {
+      cursorImg.src = THUMB_IMGS[idx] || THUMB_IMGS[0];
+      cursorThumb.classList.add('active');
+    });
+    item.addEventListener('mouseleave', () => {
+      cursorThumb.classList.remove('active');
+    });
     item.addEventListener('click', () => {
       activeIdx = idx;
       listItems.forEach(i => i.classList.remove('active'));
