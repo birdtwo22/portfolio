@@ -259,9 +259,24 @@
   function showIntro() {
     listItems.forEach(i => i.classList.remove('active'));
     activeIdx = -1;
-    document.getElementById('intro-panel').style.display = '';
-    document.getElementById('project-panel').style.display = 'none';
-    clearSliders();
+    const projectPanel = document.getElementById('project-panel');
+    const introPanel   = document.getElementById('intro-panel');
+    if (projectPanel.style.display === 'none') return;
+    projectPanel.style.transition = 'opacity 0.25s ease';
+    projectPanel.style.opacity = '0';
+    setTimeout(() => {
+      projectPanel.style.display = 'none';
+      projectPanel.style.opacity = '';
+      projectPanel.style.transition = '';
+      introPanel.style.display = '';
+      introPanel.style.opacity = '0';
+      introPanel.style.transition = 'opacity 0.3s ease';
+      requestAnimationFrame(() => {
+        introPanel.style.opacity = '1';
+        setTimeout(() => { introPanel.style.transition = ''; introPanel.style.opacity = ''; }, 320);
+      });
+      clearSliders();
+    }, 260);
   }
   async function showProject(idx) {
     clearSliders();
