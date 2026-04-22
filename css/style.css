@@ -429,7 +429,7 @@ img { display: block; }
 /* ── Two-column layout (fixed sidebar + fluid content) ── */
 .layout {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 2fr 3fr;
   height: 100vh;
   overflow: hidden;
 }
