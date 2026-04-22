@@ -120,6 +120,8 @@
     function dismissSplash() {
       if (dismissed) return;
       dismissed = true;
+      onSplash = false;
+      cursorThumb.classList.remove('active');
       sessionStorage.setItem('sp-visited', '1');
       splash.classList.add('hidden');
       const blockScroll = e => e.preventDefault();
@@ -183,6 +185,8 @@
   document.body.appendChild(cursorThumb);
 
   let tx = 0, ty = 0, cx = 0, cy = 0;
+  let lastMX = 0, lastMY = 0, distAccum = 0, thumbImgIdx = 0;
+  let onSplash = !sessionStorage.getItem('sp-visited');
 
   (function animateThumb() {
     cx += (tx - cx) * 0.1;
@@ -194,6 +198,24 @@
   document.addEventListener('mousemove', e => {
     tx = e.clientX + 20;
     ty = e.clientY - 90;
+
+    if (!onSplash) return;
+
+    const dx = e.clientX - lastMX;
+    const dy = e.clientY - lastMY;
+    lastMX = e.clientX; lastMY = e.clientY;
+    distAccum += Math.sqrt(dx * dx + dy * dy);
+
+    cursorThumb.classList.add('active');
+
+    if (distAccum > 120) {
+      distAccum = 0;
+      let next;
+      do { next = Math.floor(Math.random() * THUMB_IMGS.length); }
+      while (next === thumbImgIdx && THUMB_IMGS.length > 1);
+      thumbImgIdx = next;
+      cursorImg.src = THUMB_IMGS[thumbImgIdx];
+    }
   });
 
   // ── Project list click ────────────────────────────────────
