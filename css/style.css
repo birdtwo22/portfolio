@@ -426,10 +426,10 @@ img { display: block; }
   text-transform: uppercase;
 }
 
-/* ── Two-column 1:1 layout ── */
+/* ── Two-column layout (fixed sidebar + fluid content) ── */
 .layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 300px 1fr;
   height: 100vh;
   overflow: hidden;
 }
@@ -728,7 +728,7 @@ img { display: block; }
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 40px 48px 48px;
+  padding: 40px 40px 48px 36px;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: none;
