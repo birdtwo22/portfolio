@@ -785,6 +785,15 @@ img { display: block; }
   color: var(--text-muted);
 }
 
+.about-photo-email {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 8px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.about-photo-email:hover { color: var(--accent); }
+
 .about-headline-col {
   display: flex;
   flex-direction: column;

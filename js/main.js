@@ -249,13 +249,11 @@
   const aboutLink = document.getElementById('about-link');
   if (aboutLink) aboutLink.addEventListener('click', e => { e.preventDefault(); showIntro(); });
 
-  // 이메일 복사
-  const emailLink = document.querySelector('a[href^="mailto:"]');
-  if (emailLink) {
-    emailLink.addEventListener('click', e => {
-      e.preventDefault();
-      const addr = emailLink.href.replace('mailto:', '');
-      navigator.clipboard.writeText(addr).then(() => showToast('Email copied!'));
+  // 이메일 복사 (프로필 패널)
+  const profileEmail = document.getElementById('profile-email');
+  if (profileEmail) {
+    profileEmail.addEventListener('click', () => {
+      navigator.clipboard.writeText('seui0710@naver.com').then(() => showToast('Email copied!'));
     });
   }
 
