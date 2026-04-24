@@ -786,13 +786,23 @@ img { display: block; }
 }
 
 .about-photo-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   font-size: 11px;
-  color: var(--text-muted);
-  margin-top: 8px;
+  color: var(--text-secondary);
+  margin-top: 10px;
   cursor: pointer;
-  transition: color 0.2s ease;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
-.about-photo-email:hover { color: var(--accent); }
+.about-photo-email:hover {
+  color: #0e0e0e;
+  background: var(--accent);
+  border-color: var(--accent);
+}
 
 .about-headline-col {
   display: flex;
