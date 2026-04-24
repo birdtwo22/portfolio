@@ -129,8 +129,8 @@
       setTimeout(() => {
         splash.style.display = 'none';
         document.removeEventListener('wheel', blockScroll);
-        setTimeout(initAboutAnimations, 700);
-      }, 750);
+        setTimeout(initAboutAnimations, 80);
+      }, 600);
     }
 
     // Line mask reveal
@@ -503,7 +503,7 @@
       setTimeout(() => {
         el.style.opacity = '1';
         el.style.transform = 'translateY(0)';
-      }, i * 80);
+      }, i * 40);
     });
   }
 
