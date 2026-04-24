@@ -1140,7 +1140,8 @@ nav.detail-nav {
   display: flex;
   gap: 40px;
   flex-wrap: wrap;
-  margin-bottom: 24px;
+  margin-top: 20px;
+  margin-bottom: 0;
 }
 
 .detail-meta-item .meta-key {
@@ -1435,3 +1436,15 @@ body.lang-ko [data-lang="ko"]:not(.lang-btn) { display: revert; }
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
+
+/* ── Korean language overrides ───────────────────────────── */
+.lang-ko .col-name       { letter-spacing: -0.01em; }
+.lang-ko .col-role       { letter-spacing: 0; }
+.lang-ko .about-greeting { font-size: 22px; letter-spacing: -0.01em; line-height: 1.4; }
+.lang-ko .about-bio-text { letter-spacing: 0; line-height: 1.9; word-break: keep-all; }
+.lang-ko .about-section-title { letter-spacing: 0.06em; }
+.lang-ko .about-row-title     { letter-spacing: 0; }
+.lang-ko .about-row-sub       { letter-spacing: 0; }
+.lang-ko .about-row-desc      { letter-spacing: 0; word-break: keep-all; }
+.lang-ko .detail-title        { letter-spacing: -0.01em; word-break: keep-all; }
+.lang-ko .st-line             { letter-spacing: -0.02em; }
