@@ -82,19 +82,6 @@
     },
     {
       num: '07',
-      titleEn: 'IVI Real-Time Data Service',
-      titleKo: 'IVI 실시간 데이터 서비스',
-      client: 'Hyundai Motor Company',
-      category: 'Automotive · UX Research',
-      descEn: 'End-to-end UX planning for a context-aware in-vehicle data service.',
-      descKo: '맥락 인지형 차량용 데이터 서비스 앱의 UX 기획 전 과정.',
-      stat: 'IDI + UPD research',
-      img: null,
-      placeholder: 'Hyundai\nIVI Service',
-      url: 'project/ivi-service.html',
-    },
-    {
-      num: '08',
       titleEn: 'CCNC IVI GUI Resources',
       titleKo: 'CCNC IVI GUI 리소스',
       client: 'Hyundai Motor Company',
@@ -174,7 +161,6 @@
     'images/slim-display.jpg',
     'images/lg-optical.jpg',
     'images/Mohey.png',
-    'images/20260260.png',
     'images/20260259.png',
   ];
 
