@@ -1337,8 +1337,11 @@ body.lang-ko [data-lang="ko"]:not(.lang-btn) { display: revert; }
   .proj-meta-left { border-right: none; border-bottom: 1px solid var(--border); }
   .detail-nav, nav.detail-nav { padding: 0 20px; }
   .detail-back { left: 20px; }
-  .detail-hero, .detail-body { padding-left: 20px; padding-right: 20px; }
+  .detail-hero, .detail-body { padding-left: 12px; padding-right: 12px; }
   .detail-meta-row { gap: 20px; }
+  .about-top { grid-template-columns: 1fr; gap: 24px; }
+  .about-photo-wrap { width: 100%; aspect-ratio: 4/3; }
+  .about-photo-col { display: flex; flex-direction: column; align-items: flex-start; }
 }
 /* ── Scroll animations ───────────────────────────────────── */
 .scroll-hidden {
