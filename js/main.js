@@ -249,6 +249,28 @@
   const aboutLink = document.getElementById('about-link');
   if (aboutLink) aboutLink.addEventListener('click', e => { e.preventDefault(); showIntro(); });
 
+  // 이메일 복사
+  const emailLink = document.querySelector('a[href^="mailto:"]');
+  if (emailLink) {
+    emailLink.addEventListener('click', e => {
+      e.preventDefault();
+      const addr = emailLink.href.replace('mailto:', '');
+      navigator.clipboard.writeText(addr).then(() => showToast('Email copied!'));
+    });
+  }
+
+  function showToast(msg) {
+    const t = document.createElement('div');
+    t.className = 'toast';
+    t.textContent = msg;
+    document.body.appendChild(t);
+    requestAnimationFrame(() => t.classList.add('toast-show'));
+    setTimeout(() => {
+      t.classList.remove('toast-show');
+      setTimeout(() => t.remove(), 300);
+    }, 2000);
+  }
+
   // ── Language toggle ──────────────────────────────────────
   function applyLang(lang) {
     document.querySelectorAll('[data-lang]').forEach(el => {
