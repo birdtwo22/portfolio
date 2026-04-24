@@ -257,7 +257,7 @@
 
   // ── Language toggle ──────────────────────────────────────
   function applyLang(lang) {
-    document.querySelectorAll('[data-lang]').forEach(el => {
+    document.querySelectorAll('[data-lang]:not(.lang-btn)').forEach(el => {
       el.style.display = el.dataset.lang === lang ? '' : 'none';
     });
   }
@@ -265,6 +265,7 @@
     btn.addEventListener('click', () => {
       document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+      document.body.classList.toggle('lang-ko', btn.dataset.lang === 'ko');
       applyLang(btn.dataset.lang);
     });
   });
