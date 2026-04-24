@@ -1217,12 +1217,14 @@ nav.detail-nav {
 
 /* Outcome cards */
 .outcome-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 14px;
 }
 
 .outcome-card {
+  flex: 0 0 auto;
+  width: 220px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
