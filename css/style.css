@@ -745,6 +745,10 @@ img { display: block; }
   align-items: stretch;
 }
 
+.intro-panel > * {
+  max-width: 860px;
+}
+
 .intro-panel::-webkit-scrollbar { display: none; }
 .intro-panel.fading { opacity: 0; }
 
@@ -988,11 +992,12 @@ img { display: block; }
 }
 
 .project-content .detail-body {
-  max-width: 100%;
+  max-width: 860px;
   padding: 40px 36px 60px;
 }
 
 .project-content .detail-hero {
+  max-width: 860px;
   padding: 28px 36px 28px;
 }
 
