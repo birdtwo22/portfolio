@@ -746,7 +746,7 @@ img { display: block; }
 }
 
 .intro-panel > * {
-  max-width: 860px;
+  max-width: 720px;
 }
 
 .intro-panel::-webkit-scrollbar { display: none; }
@@ -992,12 +992,12 @@ img { display: block; }
 }
 
 .project-content .detail-body {
-  max-width: 860px;
+  max-width: 720px;
   padding: 40px 36px 60px;
 }
 
 .project-content .detail-hero {
-  max-width: 860px;
+  max-width: 720px;
   padding: 28px 36px 28px;
 }
 
