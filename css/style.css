@@ -1329,6 +1329,12 @@ body.lang-ko [data-lang="en"]:not(.lang-btn) { display: none; }
 body.lang-ko [data-lang="ko"]:not(.lang-btn) { display: revert; }
 
 /* ── Responsive ── */
+@media (min-width: 1280px) {
+  .intro-panel { padding-right: 80px; }
+  .project-content .detail-hero,
+  .project-content .detail-body { padding-right: 80px; }
+}
+
 @media (max-width: 700px) {
   html, body { overflow: auto; }
   .layout { grid-template-columns: 1fr; height: auto; overflow: visible; }
