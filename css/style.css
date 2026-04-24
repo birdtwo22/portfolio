@@ -878,8 +878,8 @@ img { display: block; }
 .about-tag {
   font-size: 10px;
   font-weight: 500;
-  color: var(--accent);
-  border: 1px solid var(--accent);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
   border-radius: 3px;
   padding: 1px 6px;
   letter-spacing: 0.04em;
