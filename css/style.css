@@ -853,8 +853,8 @@ img { display: block; }
 
 .about-row {
   display: grid;
-  grid-template-columns: 130px 1fr;
-  gap: 16px;
+  grid-template-columns: 160px 1fr;
+  gap: 32px;
 }
 
 .about-row-date {
