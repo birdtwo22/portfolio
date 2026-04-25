@@ -192,9 +192,9 @@
         loading.classList.add('active');
         iframe.src = iframe.dataset.src;
         if (typeof gtag !== 'undefined') gtag('event', 'video_play', { project: 'monimo' });
-        iframe.addEventListener('load', function () {
+        setTimeout(function () {
           loading.classList.remove('active');
-        }, { once: true });
+        }, 3500);
       });
     })();
   </script>
