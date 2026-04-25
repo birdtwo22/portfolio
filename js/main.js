@@ -96,6 +96,76 @@
   ];
 
     // ── Splash screen ────────────────────────────────────────
+  // ── Hero wave canvas ──────────────────────────────────────
+  let heroWaveRafId = null;
+  (function () {
+    const canvas = document.getElementById('hero-canvas');
+    if (!canvas) return;
+    if (sessionStorage.getItem('sp-visited')) return;
+    const ctx = canvas.getContext('2d');
+    let width, height, imageData, data;
+    const SCALE = 2;
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      width  = Math.floor(canvas.width  / SCALE);
+      height = Math.floor(canvas.height / SCALE);
+      imageData = ctx.createImageData(width, height);
+      data = imageData.data;
+    };
+    window.addEventListener('resize', resize);
+    resize();
+
+    const SIN_TABLE = new Float32Array(1024);
+    const COS_TABLE = new Float32Array(1024);
+    for (let i = 0; i < 1024; i++) {
+      const a = (i / 1024) * Math.PI * 2;
+      SIN_TABLE[i] = Math.sin(a);
+      COS_TABLE[i] = Math.cos(a);
+    }
+    const tbl = (x, T) => {
+      let n = x % (Math.PI * 2);
+      if (n < 0) n += Math.PI * 2;
+      return T[Math.floor((n / (Math.PI * 2)) * 1024) & 1023];
+    };
+    const fSin = x => tbl(x, SIN_TABLE);
+    const fCos = x => tbl(x, COS_TABLE);
+
+    const startTime = Date.now();
+    const render = () => {
+      const t = (Date.now() - startTime) * 0.001;
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          const ux = (2 * x - width)  / height;
+          const uy = (2 * y - height) / height;
+          let a = 0, d = 0;
+          for (let i = 0; i < 4; i++) {
+            a += fCos(i - d + t * 0.5 - a * ux);
+            d += fSin(i * uy + a);
+          }
+          const wave      = (fSin(a) + fCos(d)) * 0.5;
+          const intensity = 0.3 + 0.4 * wave;
+          const base      = 0.1 + 0.15 * fCos(ux + uy + t * 0.3);
+          const blue      = 0.2  * fSin(a * 1.5 + t * 0.2);
+          const purple    = 0.15 * fCos(d * 2   + t * 0.1);
+          const r = Math.max(0, Math.min(1, base + purple * 0.8)) * intensity;
+          const g = Math.max(0, Math.min(1, base + blue   * 0.6)) * intensity;
+          const b = Math.max(0, Math.min(1, base + blue   * 1.2 + purple * 0.4)) * intensity;
+          const idx = (y * width + x) * 4;
+          data[idx]     = r * 255;
+          data[idx + 1] = g * 255;
+          data[idx + 2] = b * 255;
+          data[idx + 3] = 255;
+        }
+      }
+      ctx.putImageData(imageData, 0, 0);
+      ctx.drawImage(canvas, 0, 0, width, height, 0, 0, canvas.width, canvas.height);
+      heroWaveRafId = requestAnimationFrame(render);
+    };
+    render();
+  })();
+
   const splash      = document.getElementById('splash');
   const splashEnter = document.getElementById('splash-enter');
 
@@ -111,6 +181,7 @@
       cursorThumb.classList.remove('active');
       sessionStorage.setItem('sp-visited', '1');
       splash.classList.add('hidden');
+      if (heroWaveRafId) cancelAnimationFrame(heroWaveRafId);
       const blockScroll = e => e.preventDefault();
       document.addEventListener('wheel', blockScroll, { passive: false });
       setTimeout(() => {
