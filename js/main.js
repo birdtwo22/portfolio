@@ -259,7 +259,7 @@
   if (!isTouchDevice) document.body.appendChild(hoverThumb);
 
   let tx = 0, ty = 0, cx = 0, cy = 0;
-  let thumbImgIdx = 0;
+  let lastMX = 0, lastMY = 0, distAccum = 0, thumbImgIdx = 0;
   let onSplash = !sessionStorage.getItem('sp-visited');
 
   function setThumbIdx(idx) {
@@ -278,6 +278,23 @@
     document.addEventListener('mousemove', e => {
       tx = e.clientX + 24;
       ty = e.clientY - 100;
+
+      if (!onSplash) return;
+
+      const dx = e.clientX - lastMX;
+      const dy = e.clientY - lastMY;
+      lastMX = e.clientX; lastMY = e.clientY;
+      distAccum += Math.sqrt(dx * dx + dy * dy);
+
+      hoverThumb.classList.add('visible');
+
+      if (distAccum > 120) {
+        distAccum = 0;
+        let next;
+        do { next = Math.floor(Math.random() * THUMB_IMGS.length); }
+        while (next === thumbImgIdx && THUMB_IMGS.length > 1);
+        setThumbIdx(next);
+      }
     });
   }
 
