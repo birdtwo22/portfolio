@@ -376,7 +376,10 @@
     colName.innerHTML = [...colName.textContent.trim()].map(ch =>
       `<span class="letter">${ch === ' ' ? '&nbsp;' : ch}</span>`
     ).join('');
-    colName.addEventListener('click', showIntro);
+    colName.addEventListener('click', () => {
+      sessionStorage.removeItem('sp-visited');
+      window.location.href = 'index.html';
+    });
   }
   const aboutLink = document.getElementById('about-link');
   if (aboutLink) aboutLink.addEventListener('click', e => { e.preventDefault(); showIntro(); });
