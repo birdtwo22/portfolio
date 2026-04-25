@@ -560,7 +560,7 @@ img { display: block; }
 }
 
 .proj-list-item:hover {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.07);
 }
 
 .proj-list-item:hover .proj-list-name,
@@ -607,11 +607,11 @@ img { display: block; }
 
 .proj-list-arrow {
   margin-left: auto;
-  font-size: 13px;
-  color: var(--text-muted);
+  font-size: 15px;
+  color: var(--text-secondary);
   opacity: 0;
-  translate: -6px 4px;
-  transition: opacity 0.25s ease, translate 0.25s ease;
+  translate: 0px 6px;
+  transition: opacity 0.2s ease, translate 0.2s ease;
   flex-shrink: 0;
 }
 
