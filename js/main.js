@@ -298,6 +298,49 @@
     });
   }
 
+  // ── Custom cursor (dot + lagging ring) ───────────────────
+  if (!isTouchDevice) {
+    const cursorDot = document.createElement('div');
+    cursorDot.className = 'cursor-dot';
+    const cursorRing = document.createElement('div');
+    cursorRing.className = 'cursor-ring';
+    document.body.appendChild(cursorDot);
+    document.body.appendChild(cursorRing);
+
+    const hasSplash = !!document.getElementById('splash');
+    let cmx = 0, cmy = 0;
+    let cdx = 0, cdy = 0;
+    let crx = 0, cry = 0;
+    let cursorShown = false;
+
+    document.addEventListener('mousemove', e => {
+      cmx = e.clientX;
+      cmy = e.clientY;
+      const canShow = !hasSplash || !onSplash;
+      if (canShow && !cursorShown) {
+        cursorShown = true;
+        document.body.classList.add('cursor-active');
+        cursorDot.classList.add('active');
+        cursorRing.classList.add('active');
+      }
+    });
+
+    document.addEventListener('mouseover', e => {
+      const hit = e.target.closest('a, button, [role="button"], input, textarea, select');
+      cursorRing.classList.toggle('hovering', !!hit);
+    });
+
+    (function animateCursor() {
+      cdx += (cmx - cdx) * 0.2;
+      cdy += (cmy - cdy) * 0.2;
+      crx += (cmx - crx) * 0.1;
+      cry += (cmy - cry) * 0.1;
+      cursorDot.style.translate = `${cdx}px ${cdy}px`;
+      cursorRing.style.translate = `${crx}px ${cry}px`;
+      requestAnimationFrame(animateCursor);
+    })();
+  }
+
   // ── Project list click ────────────────────────────────────
   const listItems = document.querySelectorAll('.proj-list-item');
 

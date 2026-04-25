@@ -1512,6 +1512,49 @@ body.lang-ko [data-lang="ko"]:not(.lang-btn) { display: revert; }
   filter: blur(0px);
 }
 
+/* ── Custom cursor ── */
+body.cursor-active,
+body.cursor-active * {
+  cursor: none !important;
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  will-change: translate;
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--text-primary);
+}
+
+.cursor-ring {
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid var(--text-primary);
+  transition: opacity 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+
+.cursor-dot.active,
+.cursor-ring.active {
+  opacity: 1;
+}
+
+.cursor-ring.hovering {
+  width: 44px;
+  height: 44px;
+}
+
 /* ── Toast ── */
 .toast {
   position: fixed;
