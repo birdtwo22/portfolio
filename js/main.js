@@ -150,12 +150,13 @@
             d += fSin(i * uy + a);
           }
           const wave      = (fSin(a) + fCos(d)) * 0.5;
-          const intensity = 0.2 + 0.38 * wave;
+          const intensity = 0.07 + 0.18 * wave;
           const shift     = fSin(a * 1.3 + t * 0.15);
-          // neon yellow-green (#c8ff3e) with subtle hue drift
-          const r = Math.max(0, Math.min(1, (0.72 + shift * 0.18) * intensity));
-          const g = Math.max(0, Math.min(1, (0.98 + shift * 0.04) * intensity));
-          const b = Math.max(0, Math.min(1, (0.12 - shift * 0.12) * intensity));
+          const drift     = fCos(d * 0.8 + t * 0.1);
+          // neon yellow-green base, subtle blue/teal mix
+          const r = Math.max(0, Math.min(1, (0.6 + shift * 0.1 + drift * 0.05) * intensity));
+          const g = Math.max(0, Math.min(1, (0.9 + shift * 0.05) * intensity));
+          const b = Math.max(0, Math.min(1, (0.18 + drift * 0.25 - shift * 0.05) * intensity));
           const idx = (y * width + x) * 4;
           data[idx]     = r * 255;
           data[idx + 1] = g * 255;
