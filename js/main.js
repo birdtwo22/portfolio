@@ -154,10 +154,10 @@
           const shift     = fSin(a * 1.3 + t * 0.15);
           const drift     = fCos(d * 0.8 + t * 0.1);
           const twist     = fSin(d * 1.1 - a * 0.7 + t * 0.08);
-          // neon green + teal + soft purple mix
-          const r = Math.max(0, Math.min(1, (0.55 + shift * 0.1 + twist * 0.3) * intensity));
-          const g = Math.max(0, Math.min(1, (0.85 + shift * 0.08 - twist * 0.1) * intensity));
-          const b = Math.max(0, Math.min(1, (0.22 + drift * 0.35 + twist * 0.4) * intensity));
+          // neon green + teal + blue mix
+          const r = Math.max(0, Math.min(1, (0.45 + shift * 0.08 - twist * 0.15) * intensity));
+          const g = Math.max(0, Math.min(1, (0.85 + shift * 0.08 - twist * 0.05) * intensity));
+          const b = Math.max(0, Math.min(1, (0.22 + drift * 0.35 + twist * 0.6) * intensity));
           const idx = (y * width + x) * 4;
           data[idx]     = r * 255;
           data[idx + 1] = g * 255;
