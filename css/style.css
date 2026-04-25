@@ -1291,6 +1291,30 @@ nav.detail-nav {
   transform: scale(1.08);
 }
 
+.video-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: #111;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-loading.active {
+  display: flex;
+}
+
+.video-spinner {
+  width: 36px;
+  height: 36px;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 .video-embed iframe {
   position: absolute;
   inset: 0;
