@@ -105,10 +105,17 @@
     <div class="detail-section">
       <h2><span data-lang="en">Prototype Demo</span><span data-lang="ko">프로토타입 데모</span></h2>
       <div class="video-embed">
+        <div class="video-cover" onclick="this.style.display='none'">
+          <svg class="video-play-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="32" r="31" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <polygon points="26,20 48,32 26,44" fill="white"/>
+          </svg>
+        </div>
         <iframe
           src="https://drive.google.com/file/d/1n6ekaZu4AAf3ooEBJmnPZO98ZnnWZweV/preview"
           allow="autoplay"
-          allowfullscreen>
+          allowfullscreen
+          loading="lazy">
         </iframe>
       </div>
     </div>

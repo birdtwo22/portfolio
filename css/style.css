@@ -1266,6 +1266,32 @@ nav.detail-nav {
   background: #000;
 }
 
+.video-cover {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.video-cover:hover { background: #1a1a1a; }
+
+.video-play-icon {
+  width: 64px;
+  height: 64px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.video-cover:hover .video-play-icon {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
 .video-embed iframe {
   position: absolute;
   inset: 0;
