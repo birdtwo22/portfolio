@@ -378,7 +378,7 @@
     ).join('');
     colName.addEventListener('click', () => {
       sessionStorage.removeItem('sp-visited');
-      window.location.href = 'index.html';
+      window.location.reload();
     });
   }
   const aboutLink = document.getElementById('about-link');
