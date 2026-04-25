@@ -260,7 +260,7 @@
     (function animateThumb() {
       cx += (tx - cx) * 0.1;
       cy += (ty - cy) * 0.1;
-      cursorThumb.style.transform = `translate(${cx}px,${cy}px)`;
+      cursorThumb.style.translate = `${cx}px ${cy}px`;
       requestAnimationFrame(animateThumb);
     })();
 
