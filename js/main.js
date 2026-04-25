@@ -185,7 +185,7 @@
       if (dismissed) return;
       dismissed = true;
       onSplash = false;
-      cursorThumb.classList.remove('active');
+      hoverThumb.classList.remove('visible');
       sessionStorage.setItem('sp-visited', '1');
       splash.classList.add('hidden');
       if (heroWaveRafId) cancelAnimationFrame(heroWaveRafId);
@@ -246,27 +246,38 @@
     'images/20260259.png',
   ];
 
-  const cursorThumb = document.createElement('div');
-  cursorThumb.className = 'cursor-thumb';
-  const cursorImg = document.createElement('img');
-  cursorThumb.appendChild(cursorImg);
-  if (!isTouchDevice) document.body.appendChild(cursorThumb);
+  const hoverThumb = document.createElement('div');
+  hoverThumb.className = 'hover-thumb';
+  const thumbImgs = THUMB_IMGS.map((src, i) => {
+    const img = document.createElement('img');
+    img.className = 'hover-thumb-img';
+    img.src = src;
+    img.dataset.idx = i;
+    hoverThumb.appendChild(img);
+    return img;
+  });
+  if (!isTouchDevice) document.body.appendChild(hoverThumb);
 
   let tx = 0, ty = 0, cx = 0, cy = 0;
   let lastMX = 0, lastMY = 0, distAccum = 0, thumbImgIdx = 0;
   let onSplash = !sessionStorage.getItem('sp-visited');
 
+  function setThumbIdx(idx) {
+    thumbImgs.forEach((img, i) => img.classList.toggle('active', i === idx));
+    thumbImgIdx = idx;
+  }
+
   if (!isTouchDevice) {
     (function animateThumb() {
-      cx += (tx - cx) * 0.1;
-      cy += (ty - cy) * 0.1;
-      cursorThumb.style.translate = `${cx}px ${cy}px`;
+      cx += (tx - cx) * 0.12;
+      cy += (ty - cy) * 0.12;
+      hoverThumb.style.translate = `${cx}px ${cy}px`;
       requestAnimationFrame(animateThumb);
     })();
 
     document.addEventListener('mousemove', e => {
-      tx = e.clientX + 20;
-      ty = e.clientY - 90;
+      tx = e.clientX + 24;
+      ty = e.clientY - 100;
 
       if (!onSplash) return;
 
@@ -275,15 +286,14 @@
       lastMX = e.clientX; lastMY = e.clientY;
       distAccum += Math.sqrt(dx * dx + dy * dy);
 
-      cursorThumb.classList.add('active');
+      hoverThumb.classList.add('visible');
 
       if (distAccum > 120) {
         distAccum = 0;
         let next;
         do { next = Math.floor(Math.random() * THUMB_IMGS.length); }
         while (next === thumbImgIdx && THUMB_IMGS.length > 1);
-        thumbImgIdx = next;
-        cursorImg.src = THUMB_IMGS[thumbImgIdx];
+        setThumbIdx(next);
       }
     });
   }
@@ -295,11 +305,11 @@
     const idx = parseInt(item.dataset.idx);
     if (!isTouchDevice) {
       item.addEventListener('mouseenter', () => {
-        cursorImg.src = THUMB_IMGS[idx] || THUMB_IMGS[0];
-        cursorThumb.classList.add('active');
+        setThumbIdx(idx);
+        hoverThumb.classList.add('visible');
       });
       item.addEventListener('mouseleave', () => {
-        cursorThumb.classList.remove('active');
+        hoverThumb.classList.remove('visible');
       });
     }
     item.addEventListener('click', () => {

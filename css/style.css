@@ -550,12 +550,17 @@ img { display: block; }
 
 .proj-list-item {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 8px;
-  padding: 6px 0;
+  padding: 7px 10px;
+  margin: 0 -10px;
   cursor: pointer;
-  border-bottom: 1px solid transparent;
-  transition: all var(--ease);
+  border-radius: 6px;
+  transition: background var(--ease);
+}
+
+.proj-list-item:hover {
+  background: rgba(255,255,255,0.05);
 }
 
 .proj-list-item:hover .proj-list-name,
@@ -581,6 +586,38 @@ img { display: block; }
   color: var(--text-secondary);
   transition: color var(--ease);
   line-height: 1.4;
+  position: relative;
+}
+
+.proj-list-name::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.3s ease;
+}
+
+.proj-list-item:hover .proj-list-name::after,
+.proj-list-item.active .proj-list-name::after {
+  width: 100%;
+}
+
+.proj-list-arrow {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--text-muted);
+  opacity: 0;
+  translate: -6px 4px;
+  transition: opacity 0.25s ease, translate 0.25s ease;
+  flex-shrink: 0;
+}
+
+.proj-list-item:hover .proj-list-arrow {
+  opacity: 1;
+  translate: 0px 0px;
 }
 
 /* Language Toggle */
@@ -1430,38 +1467,49 @@ body.lang-ko [data-lang="ko"]:not(.lang-btn) { display: revert; }
   transition: opacity 0.55s ease, transform 0.55s ease;
 }
 
-/* ── Cursor thumbnail ── */
-.cursor-thumb {
+/* ── Hover thumbnail (stacked images, project list) ── */
+.hover-thumb {
   position: fixed;
   top: 0;
   left: 0;
-  width: 220px;
-  height: 140px;
+  width: 240px;
+  height: 150px;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
-  scale: 0;
-  rotate: -12deg;
-  transition: opacity 0.25s ease,
-              scale 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
-              rotate 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.65);
+  opacity: 0;
+  scale: 0.85;
+  rotate: -10deg;
+  transition: opacity 0.3s ease,
+              scale 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+              rotate 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
   will-change: translate, scale, rotate;
 }
 
-.cursor-thumb.active {
+.hover-thumb.visible {
   opacity: 1;
   scale: 1;
-  rotate: 6deg;
+  rotate: 5deg;
 }
 
-.cursor-thumb img {
+.hover-thumb-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
+  opacity: 0;
+  scale: 1.08;
+  filter: blur(8px);
+  transition: opacity 0.45s ease, scale 0.5s ease, filter 0.5s ease;
+}
+
+.hover-thumb-img.active {
+  opacity: 1;
+  scale: 1;
+  filter: blur(0px);
 }
 
 /* ── Toast ── */
