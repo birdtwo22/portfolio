@@ -333,9 +333,11 @@
       item.addEventListener('mouseenter', () => {
         setThumbIdx(idx);
         hoverThumb.classList.add('visible');
+        document.body.classList.add('thumb-active');
       });
       item.addEventListener('mouseleave', () => {
         hoverThumb.classList.remove('visible');
+        document.body.classList.remove('thumb-active');
       });
     }
     item.addEventListener('click', () => {

@@ -1533,6 +1533,11 @@ body.cursor-active * {
   opacity: 1;
 }
 
+body.thumb-active .cursor-dot,
+body.thumb-active .cursor-ring {
+  opacity: 0 !important;
+}
+
 .cursor-ring.hovering {
   width: 44px;
   height: 44px;
