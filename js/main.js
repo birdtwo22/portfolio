@@ -104,7 +104,7 @@
     if (sessionStorage.getItem('sp-visited')) return;
     const ctx = canvas.getContext('2d');
     let width, height, imageData, data;
-    const SCALE = 2;
+    const SCALE = 5;
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -133,14 +133,19 @@
     const fCos = x => tbl(x, COS_TABLE);
 
     const startTime = Date.now();
-    const render = () => {
+    const FRAME_MS = 1000 / 30;
+    let lastFrame = 0;
+    const render = (ts) => {
+      heroWaveRafId = requestAnimationFrame(render);
+      if (ts - lastFrame < FRAME_MS) return;
+      lastFrame = ts;
       const t = (Date.now() - startTime) * 0.001;
       for (let y = 0; y < height; y++) {
         for (let x = 0; x < width; x++) {
           const ux = (2 * x - width)  / height;
           const uy = (2 * y - height) / height;
           let a = 0, d = 0;
-          for (let i = 0; i < 4; i++) {
+          for (let i = 0; i < 3; i++) {
             a += fCos(i - d + t * 0.5 - a * ux);
             d += fSin(i * uy + a);
           }
@@ -160,10 +165,11 @@
         }
       }
       ctx.putImageData(imageData, 0, 0);
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'low';
       ctx.drawImage(canvas, 0, 0, width, height, 0, 0, canvas.width, canvas.height);
-      heroWaveRafId = requestAnimationFrame(render);
     };
-    render();
+    heroWaveRafId = requestAnimationFrame(render);
   })();
 
   const splash      = document.getElementById('splash');
