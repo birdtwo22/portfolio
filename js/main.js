@@ -344,6 +344,10 @@
       activeIdx = idx;
       listItems.forEach(i => i.classList.remove('active'));
       item.classList.add('active');
+      if (typeof gtag !== 'undefined') {
+        const name = item.querySelector('.proj-list-name')?.textContent.trim().replace(/\s+/g, ' ');
+        gtag('event', 'project_click', { project_index: idx, project_name: name });
+      }
       showProject(idx);
     });
   });
@@ -364,6 +368,7 @@
   if (profileEmail) {
     profileEmail.addEventListener('click', () => {
       navigator.clipboard.writeText('seui0710@naver.com').then(() => showToast('Email copied!'));
+      if (typeof gtag !== 'undefined') gtag('event', 'email_copy');
     });
   }
 
@@ -391,9 +396,20 @@
       btn.classList.add('active');
       document.body.classList.toggle('lang-ko', btn.dataset.lang === 'ko');
       applyLang(btn.dataset.lang);
+      if (typeof gtag !== 'undefined') gtag('event', 'language_toggle', { language: btn.dataset.lang });
     });
   });
   applyLang('en');
+
+  // ── Analytics: external link clicks ──────────────────────
+  document.querySelectorAll('a[href^="http"]').forEach(a => {
+    a.addEventListener('click', () => {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'external_link_click', { link_url: a.href, link_text: a.textContent.trim().slice(0, 50) });
+      }
+    });
+  });
+
   function showIntro() {
     listItems.forEach(i => i.classList.remove('active'));
     activeIdx = -1;

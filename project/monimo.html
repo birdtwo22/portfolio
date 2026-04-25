@@ -6,7 +6,15 @@
   <title>Monimo App Card — Seui Park</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=32" />
+  <link rel="stylesheet" href="../css/style.css?v=33" />
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1LXDW2BQ7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-S1LXDW2BQ7');
+  </script>
 </head>
 <body class="detail-page">
   <nav class="detail-nav">
@@ -183,6 +191,7 @@
         cover.style.display = 'none';
         loading.classList.add('active');
         iframe.src = iframe.dataset.src;
+        if (typeof gtag !== 'undefined') gtag('event', 'video_play', { project: 'monimo' });
         iframe.addEventListener('load', function () {
           loading.classList.remove('active');
         }, { once: true });
