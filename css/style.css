@@ -1495,6 +1495,10 @@ body.lang-ko [data-lang="ko"]:not(.lang-btn) { display: revert; }
   filter: blur(0px);
 }
 
+.hover-thumb.instant .hover-thumb-img {
+  transition: none;
+}
+
 /* ── Custom cursor ── */
 body.cursor-active,
 body.cursor-active * {

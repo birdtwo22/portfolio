@@ -286,7 +286,7 @@
       lastMX = e.clientX; lastMY = e.clientY;
       distAccum += Math.sqrt(dx * dx + dy * dy);
 
-      hoverThumb.classList.add('visible');
+      hoverThumb.classList.add('visible', 'instant');
 
       if (distAccum > 120) {
         distAccum = 0;
@@ -349,6 +349,7 @@
     if (!isTouchDevice) {
       item.addEventListener('mouseenter', () => {
         setThumbIdx(idx);
+        hoverThumb.classList.remove('instant');
         hoverThumb.classList.add('visible');
         document.body.classList.add('thumb-active');
       });
