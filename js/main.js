@@ -222,6 +222,8 @@
 
     splashEnter.addEventListener('click', e => { e.stopPropagation(); dismissSplash(); });
     splash.addEventListener('click', dismissSplash);
+    window.addEventListener('wheel', e => { if (!dismissed) dismissSplash(); }, { passive: true, once: true });
+    window.addEventListener('touchmove', e => { if (!dismissed) dismissSplash(); }, { passive: true, once: true });
     document.addEventListener('keydown', e => {
       if (dismissed) return;
       if (e.key === 'Enter' || e.key === 'Escape') dismissSplash();
