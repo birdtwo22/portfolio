@@ -1453,6 +1453,20 @@ body.lang-ko [data-lang="ko"]:not(.lang-btn) { display: revert; }
   transition: opacity 0.55s ease, transform 0.55s ease;
 }
 
+/* ── Project reflection quote ── */
+.project-reflection {
+  border-left: 2px solid var(--accent);
+  padding-left: 20px;
+  color: var(--text-secondary);
+  font-style: italic;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.project-reflection + .project-reflection {
+  margin-top: 10px;
+}
+
 /* ── Hover thumbnail (stacked images, project list) ── */
 .hover-thumb {
   position: fixed;
