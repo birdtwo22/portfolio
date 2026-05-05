@@ -675,4 +675,40 @@
     setInterval(updateClock, 1000);
   }
 
+  // ── Lightbox ───────────────────────────────────────────────
+  (function() {
+    const overlay = document.createElement('div');
+    overlay.className = 'lightbox-overlay';
+    overlay.innerHTML = '<button class="lightbox-close">✕</button><img class="lightbox-img" />';
+    document.body.appendChild(overlay);
+
+    const lbImg = overlay.querySelector('.lightbox-img');
+    const lbClose = overlay.querySelector('.lightbox-close');
+
+    function openLightbox(src, alt) {
+      lbImg.src = src;
+      lbImg.alt = alt || '';
+      overlay.classList.add('active');
+      document.body.classList.add('lightbox-open');
+    }
+    function closeLightbox() {
+      overlay.classList.remove('active');
+      document.body.classList.remove('lightbox-open');
+      setTimeout(() => { lbImg.src = ''; }, 300);
+    }
+
+    overlay.addEventListener('click', closeLightbox);
+    lbImg.addEventListener('click', e => e.stopPropagation());
+    lbClose.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    document.addEventListener('click', e => {
+      const img = e.target.closest('img');
+      if (!img) return;
+      if (img.closest('.img-slides') || img.closest('.section-imgs') || img.classList.contains('section-img')) {
+        openLightbox(img.src, img.alt);
+      }
+    });
+  })();
+
 })();
