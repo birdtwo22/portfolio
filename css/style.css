@@ -1333,6 +1333,27 @@ nav.detail-nav {
   border: none;
 }
 
+/* ── Inline section images ── */
+.section-img {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 24px;
+  display: block;
+}
+
+.section-imgs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.section-imgs img {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+}
+
 /* ProtoPie embed */
 .protopie-embed {
   margin-top: 16px;
