@@ -451,6 +451,9 @@
     const panel = document.getElementById('project-panel');
     panel.style.display = '';
     panel.scrollTop = 0;
+    if (window.innerWidth <= 700) {
+      setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+    }
 
     const content = document.getElementById('project-content');
     content.innerHTML = `

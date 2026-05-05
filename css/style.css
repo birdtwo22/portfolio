@@ -550,11 +550,21 @@ img { display: block; }
 
 .proj-list-item {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 8px;
   padding: 7px 0;
   cursor: pointer;
   transition: background var(--ease);
+  flex-wrap: wrap;
+}
+
+.proj-list-tag {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+  margin-left: auto;
+  white-space: nowrap;
 }
 
 .proj-list-item:hover .proj-list-name,
