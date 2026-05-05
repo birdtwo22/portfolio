@@ -1428,6 +1428,8 @@ body.lang-ko [data-lang="ko"]:not(.lang-btn) { display: revert; }
   .layout { grid-template-columns: 1fr; height: auto; overflow: visible; }
   .sidebar { height: auto; border-right: none; border-bottom: 1px solid var(--border); }
   .content-panel { min-height: 100vw; }
+  .intro-panel { overflow: visible; height: auto; }
+  .project-panel { overflow: visible; height: auto; }
   .proj-meta-row { height: auto; grid-template-columns: 1fr; }
   .proj-meta-left { border-right: none; border-bottom: 1px solid var(--border); }
   .detail-nav, nav.detail-nav { padding: 0 20px; }
