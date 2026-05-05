@@ -1445,7 +1445,7 @@ body.lang-ko [data-lang="ko"]:not(.lang-btn) { display: revert; }
 }
 
 @media (max-width: 700px) {
-  html, body { overflow: auto; }
+  html, body { overflow: auto; height: auto; }
   .layout { grid-template-columns: 1fr; height: auto; overflow: visible; }
   .sidebar { height: auto; border-right: none; border-bottom: 1px solid var(--border); }
   .content-panel { min-height: 100vw; }
