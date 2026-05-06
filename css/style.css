@@ -1492,12 +1492,39 @@ body.lang-ko [data-lang="ko"]:not(.lang-btn) { display: revert; }
 }
 
 @media (max-width: 700px) {
-  html, body { overflow: auto; height: auto; }
-  .layout { grid-template-columns: 1fr; height: auto; overflow: visible; }
-  .sidebar { height: auto; border-right: none; border-bottom: 1px solid var(--border); }
-  .content-panel { min-height: 100vw; }
-  .intro-panel { overflow: visible; height: auto; }
-  .project-panel { overflow: visible; height: auto; }
+  html, body {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    height: auto !important;
+  }
+  .layout {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .sidebar {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .content-panel {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .intro-panel {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+    flex: none !important;
+  }
+  .project-panel {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
   .proj-meta-row { height: auto; grid-template-columns: 1fr; }
   .proj-meta-left { border-right: none; border-bottom: 1px solid var(--border); }
   .detail-nav, nav.detail-nav { padding: 0 20px; }

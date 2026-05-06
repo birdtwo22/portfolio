@@ -236,6 +236,14 @@
   // ── Cursor thumbnail (desktop only) ──────────────────────
   const isTouchDevice = window.matchMedia('(hover: none)').matches;
 
+  // Force scroll unlock on mobile
+  if (isTouchDevice) {
+    document.documentElement.style.setProperty('overflow-y', 'auto', 'important');
+    document.documentElement.style.setProperty('height', 'auto', 'important');
+    document.body.style.setProperty('overflow-y', 'auto', 'important');
+    document.body.style.setProperty('height', 'auto', 'important');
+  }
+
   const THUMB_IMGS = [
     'images/monimo.jpg',
     'images/nuldam.jpg',
