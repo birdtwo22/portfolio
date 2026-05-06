@@ -446,7 +446,11 @@
     document.getElementById('project-panel').style.display = 'none';
     const introPanel = document.getElementById('intro-panel');
     introPanel.style.display = '';
-    introPanel.scrollTo({ top: 0 });
+    if (isTouchDevice) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      introPanel.scrollTo({ top: 0 });
+    }
     initAboutAnimations();
   }
   async function showProject(idx) {
@@ -458,9 +462,14 @@
     document.getElementById('intro-panel').style.display = 'none';
     const panel = document.getElementById('project-panel');
     panel.style.display = '';
-    panel.scrollTop = 0;
-    if (window.innerWidth <= 700) {
-      setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+    if (isTouchDevice) {
+      setTimeout(() => {
+        const contentPanel = document.querySelector('.content-panel');
+        const top = contentPanel ? contentPanel.getBoundingClientRect().top + window.scrollY : 0;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }, 50);
+    } else {
+      panel.scrollTop = 0;
     }
 
     const content = document.getElementById('project-content');

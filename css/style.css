@@ -1515,15 +1515,15 @@ body.lang-ko [data-lang="ko"]:not(.lang-btn) { display: revert; }
     overflow: visible !important;
   }
   .intro-panel {
-    display: block !important;
     height: auto !important;
     overflow: visible !important;
     flex: none !important;
+    min-height: 0 !important;
   }
   .project-panel {
-    display: block !important;
     height: auto !important;
     overflow: visible !important;
+    min-height: 0 !important;
   }
   .proj-meta-row { height: auto; grid-template-columns: 1fr; }
   .proj-meta-left { border-right: none; border-bottom: 1px solid var(--border); }
@@ -1532,7 +1532,7 @@ body.lang-ko [data-lang="ko"]:not(.lang-btn) { display: revert; }
   .detail-hero, .detail-body { padding-left: 12px; padding-right: 12px; }
   .detail-meta-row { gap: 20px; }
   .about-top { grid-template-columns: 1fr; gap: 24px; }
-  .about-photo-wrap { width: 100%; aspect-ratio: 4/3; }
+  .about-photo-wrap { width: 120px; aspect-ratio: 3/4; }
   .about-photo-col { display: flex; flex-direction: column; align-items: flex-start; }
 }
 /* ── Scroll animations ───────────────────────────────────── */
