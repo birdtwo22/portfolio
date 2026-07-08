@@ -487,9 +487,25 @@
       const doc  = new DOMParser().parseFromString(html, 'text/html');
 
       content.innerHTML = '';
-      ['.detail-img-hero', '.detail-hero', '.detail-body'].forEach(sel => {
+      ['.detail-img-hero', '.detail-hero', '.detail-body', '.project-nav'].forEach(sel => {
         const el = doc.querySelector(sel);
         if (el) content.appendChild(document.adoptNode(el));
+      });
+
+      // prev/next 링크를 SPA 내부 네비게이션으로 가로채기
+      content.querySelectorAll('.project-nav-item').forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const href = link.getAttribute('href'); // e.g. "ivi-service.html"
+          const filename = href.split('/').pop();
+          const targetIdx = PROJECTS.findIndex(p => p.url.endsWith(filename));
+          if (targetIdx !== -1) {
+            listItems.forEach(i => i.classList.remove('active'));
+            if (listItems[targetIdx]) listItems[targetIdx].classList.add('active');
+            activeIdx = targetIdx;
+            showProject(targetIdx);
+          }
+        });
       });
 
       applyLang(lang);
@@ -502,6 +518,28 @@
   // 모바일 뒤로가기 버튼
   const mobileBackBtn = document.getElementById('mobile-back-btn');
   if (mobileBackBtn) mobileBackBtn.addEventListener('click', showIntro);
+
+  // ── Scroll to top ─────────────────────────────────────────
+  const scrollTopBtn = document.getElementById('scroll-top-btn');
+  if (scrollTopBtn) {
+    const projectPanel = document.getElementById('project-panel');
+
+    function updateScrollTopBtn() {
+      const scrollY = isTouchDevice ? window.scrollY : (projectPanel?.scrollTop || 0);
+      scrollTopBtn.classList.toggle('visible', scrollY > 300);
+    }
+
+    scrollTopBtn.addEventListener('click', () => {
+      if (isTouchDevice) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        projectPanel?.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+
+    window.addEventListener('scroll', updateScrollTopBtn, { passive: true });
+    projectPanel?.addEventListener('scroll', updateScrollTopBtn, { passive: true });
+  }
 
   // ── Image slider ─────────────────────────────────────────
 
