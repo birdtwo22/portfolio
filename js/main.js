@@ -499,6 +499,10 @@
       content.innerHTML = `<p style="padding:40px;color:var(--text-muted)">Failed to load.</p>`;
     }
   }
+  // 모바일 뒤로가기 버튼
+  const mobileBackBtn = document.getElementById('mobile-back-btn');
+  if (mobileBackBtn) mobileBackBtn.addEventListener('click', showIntro);
+
   // ── Image slider ─────────────────────────────────────────
 
   let _sliderIntervals = [];
@@ -602,7 +606,7 @@
         const dx = e.clientX - dragStartX;
         if (Math.abs(dx) > DRAG_THRESHOLD) {
           goTo(current + (dx > 0 ? -1 : 1));
-           resetTimer();
+          resetTimer();
         }
       }
       document.addEventListener('mouseup', onMouseUp);
@@ -624,7 +628,7 @@
         const dx = e.changedTouches[0].clientX - touchStartX;
         if (Math.abs(dx) > DRAG_THRESHOLD) {
           goTo(current + (dx > 0 ? -1 : 1));
-           resetTimer();
+          resetTimer();
         }
       }, { passive: true });
 

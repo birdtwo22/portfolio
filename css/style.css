@@ -1484,6 +1484,33 @@ body.lightbox-open { overflow: hidden; }
 body.lang-ko [data-lang="en"]:not(.lang-btn) { display: none; }
 body.lang-ko [data-lang="ko"]:not(.lang-btn) { display: revert; }
 
+/* ── Mobile back button ── */
+.mobile-back-btn {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .mobile-back-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 20px;
+    font-size: 13px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    background: none;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    font-family: var(--font);
+    width: 100%;
+    text-align: left;
+    transition: color var(--ease);
+  }
+  .mobile-back-btn:hover { color: var(--text-primary); }
+}
+
 /* ── Responsive ── */
 @media (min-width: 1280px) {
   .intro-panel { padding-right: 120px; }
@@ -1534,6 +1561,8 @@ body.lang-ko [data-lang="ko"]:not(.lang-btn) { display: revert; }
   .about-top { grid-template-columns: 1fr; gap: 24px; }
   .about-photo-wrap { width: 120px; aspect-ratio: 3/4; }
   .about-photo-col { display: flex; flex-direction: column; align-items: flex-start; }
+  .about-row { grid-template-columns: 1fr; gap: 2px; }
+  .about-row-date { font-size: 11px; }
 }
 /* ── Scroll animations ───────────────────────────────────── */
 .scroll-hidden {
